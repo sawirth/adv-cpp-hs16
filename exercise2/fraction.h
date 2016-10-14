@@ -2,14 +2,16 @@
 #define ADV_CPP_HS16_FRACTION_H
 
 #include <ostream>
+#include <istream>
 
-class fraction {
+class fraction
+{
 private:
     int counter;
     int denominator;
 
 public:
-    fraction(int counter = 0, int denominator = 1): counter(counter), denominator(denominator) {}
+    fraction(int counter = 0, int denominator = 1) : counter(counter), denominator(denominator) {}
 
     void shorten();
 
@@ -29,7 +31,9 @@ public:
 
     fraction operator/(fraction otherFraction);
 
-    friend std::ostream &operator<<(std::ostream &os, const fraction &fraction1);
+    friend std::ostream &operator<<(std::ostream &os, const fraction &fraction);
+
+    friend std::istream &operator>>(std::istream &is, fraction &fraction);
 };
 
 

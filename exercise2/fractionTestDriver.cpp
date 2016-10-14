@@ -9,7 +9,8 @@
 
 using namespace std;
 
-void fractionTestDriver::run() {
+void fractionTestDriver::run()
+{
     //First test
     fraction f1 = fraction(3, 4);
     fraction f2 = fraction(4, 7);
@@ -33,4 +34,12 @@ void fractionTestDriver::run() {
     assert(test3.getCounter() == 1);
     assert(test3.getDenominator() == 8);
     cout << "Third test passed: " << f5 << " - " << f6 << " = " << test3 << endl;
+
+    //Fourth test
+    fraction f7 = fraction(1, 3);
+    fraction f8 = fraction(3, 5);
+    fraction test4 = f7 * f8;
+    assert(test4.getCounter() == 1);
+    assert(test4.getDenominator() == 5);
+    cout << "Fourth test passed: " << f7 << " * " << f8 << " = " << test4 << endl;
 }

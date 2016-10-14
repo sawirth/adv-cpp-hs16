@@ -1,8 +1,8 @@
 
 #include <iostream>
 #include "exercise1/HelloWorld.h"
-#include "exercise2/fraction.h"
 #include "exercise2/fractionTestDriver.h"
+#include "exercise2/interactiveFraction.h"
 #include <algorithm>
 
 using namespace std;
@@ -84,9 +84,15 @@ void runExercise2() {
         runExercise2();
     }
 
-    if (num == 1) {
+    if (num == 1)
+	{
         auto testDriver = fractionTestDriver();
         testDriver.run();
+    }
+	else if (num == 2)
+	{
+		auto interactive = interactiveFraction();
+		interactive.run();
     }
 }
 
