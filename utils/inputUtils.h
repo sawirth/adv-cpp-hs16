@@ -13,6 +13,7 @@ namespace  utils
 	{
 		public:
 			static int getInt();
+			static double getDouble();
 	};
 }
 
