@@ -1,0 +1,36 @@
+#ifndef ADV_CPP_HS16_FRACTION_H
+#define ADV_CPP_HS16_FRACTION_H
+
+#include <ostream>
+
+class fraction {
+private:
+    int counter;
+    int denominator;
+
+public:
+    fraction(int counter = 0, int denominator = 1): counter(counter), denominator(denominator) {}
+
+    void shorten();
+
+    int getCounter() const;
+
+    void setCounter(int counter);
+
+    int getDenominator() const;
+
+    void setDenominator(int denominator);
+
+    fraction operator+(fraction otherFraction);
+
+    fraction operator-(fraction otherFraction);
+
+    fraction operator*(fraction otherFraction);
+
+    fraction operator/(fraction otherFraction);
+
+    friend std::ostream &operator<<(std::ostream &os, const fraction &fraction1);
+};
+
+
+#endif //ADV_CPP_HS16_FRACTION_H
