@@ -1,0 +1,6 @@
+#ifndef ADV_CPP_HS16_HELLOWORLD_H
+#define ADV_CPP_HS16_HELLOWORLD_H
+
+int helloWorld();
+
+#endif //ADV_CPP_HS16_HELLOWORLD_H
