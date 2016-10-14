@@ -4,16 +4,19 @@
 #include "exercise2/fractionTestDriver.h"
 #include "exercise2/interactiveFraction.h"
 #include <algorithm>
+#include "exercise3/pvectorRunner.cpp"
 
 using namespace std;
 
 void runExercise2();
+void runExercise3();
 
 void selectExercise()
 {
     cout << "The following exercises are currently implemented:" << endl;
     cout << "1 - Hello World" << endl;
     cout << "2 - Fraction" << endl;
+    cout << "3 - Persistent vector" << endl;
 
     int exerciseNumber = 0;
     cout << "Please enter the number of the exercise that you want to run: ";
@@ -34,6 +37,10 @@ void selectExercise()
 
         case 2:
             runExercise2();
+            break;
+
+        case 3:
+			runExercise3();
             break;
 
         default:
@@ -94,5 +101,11 @@ void runExercise2() {
 		auto interactive = interactiveFraction();
 		interactive.run();
     }
+}
+
+void runExercise3()
+{
+	pvectorRunner r = pvectorRunner();
+	r.run();
 }
 

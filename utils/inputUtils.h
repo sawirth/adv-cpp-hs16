@@ -5,6 +5,8 @@
 #ifndef ADV_CPP_HS16_INPUTUTILS_H
 #define ADV_CPP_HS16_INPUTUTILS_H
 
+using namespace std;
+
 namespace  utils
 {
 	class inputUtils
