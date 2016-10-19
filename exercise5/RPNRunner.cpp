@@ -5,7 +5,6 @@
 
 using namespace std;
 
-
 void RPNRunner::run()
 {
     cout << "What do you want to do?" << endl;

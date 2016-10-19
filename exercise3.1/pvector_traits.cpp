@@ -5,20 +5,23 @@
 
 using namespace std;
 
-template<typename T>
-class pvector
+template<typename T, typename P	>
+class pvector_traits
 {
 	private:
 		string filename;
 		vector<T> v;
 
 	public:
-		pvector(string filename) : filename(filename)
+		typedef P persister;
+		typedef typename vector<T>::iterator iterator;
+
+		pvector_traits(string filename) : filename(filename)
 		{
 			readVector();
 		}
 
-		~pvector()
+		~pvector_traits()
 		{
 			writeVector();
 		}
@@ -45,7 +48,7 @@ class pvector
 
 			while(getline(ifs, line, '\n'))
 			{
-				istringstream iss(line);
+				persister::read(ifs, line);
 				v.push_back(line);
 			}
 		}
@@ -53,12 +56,12 @@ class pvector
 		void writeVector()
 		{
 			ofstream ofs(filename);
-			typename vector<T>::iterator first = v.begin();
-			typename vector<T>::iterator last = v.end();
+			iterator first = v.begin();
+			iterator last = v.end();
 
 			while (first != last)
 			{
-				ofs << *first++ << endl;
+				persister::write(ofs, *first++);
 			}
 		}
 };
