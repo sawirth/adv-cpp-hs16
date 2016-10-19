@@ -13,14 +13,16 @@ class RPN
 private:
     vector <int> numberStack;
 public:
-    
-   /* <int> operator+(RPN otherFraction);
-
-    <int> operator-(RPN otherFraction);
-
-    <int> operator*(RPN otherFraction);
-
-    <int> operator/(RPN otherFraction);*/
+    void addition();
+    void subtraction();
+    void multiplication();
+    void division();
+    void putOnStack();
+    void popFromStack();
+    const vector<int> &getVector() const
+    {
+        return numberStack;
+    }
 };
 
 #endif //ADV_CPP_HS16_RPN_H
