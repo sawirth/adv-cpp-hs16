@@ -14,7 +14,8 @@ set(SOURCE_FILES
         exercise2/fractionTestDriver.h
         exercise2/interactiveFraction.cpp
         exercise2/interactiveFraction.h
-        utils/inputUtils.cpp utils/inputUtils.h
+        utils/inputUtils.cpp 
+	    utils/inputUtils.h
         exercise3/pvector.cpp
         exercise3/pvectorRunner.cpp
         exercise5/RPN.cpp
@@ -23,5 +24,9 @@ set(SOURCE_FILES
         exercise5/RPNRunner.h
         exercise6/templateRNP.cpp
         exercise6/templateRNP.h
-        exercise3.1/persistence_traits.cpp)
+        exercise3.1/pvector_traits.cpp
+        exercise3.1/pvectorRunner_traits.cpp
+        exercise3.1/persistence_traits.cpp
+        exercise3.1/pset.cpp 
+	    exercise3.1/psetRunner.cpp)
 add_executable(adv_cpp_hs16 ${SOURCE_FILES})

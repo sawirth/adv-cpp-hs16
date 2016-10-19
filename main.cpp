@@ -1,4 +1,3 @@
-
 #include <iostream>
 #include "exercise1/HelloWorld.h"
 #include "exercise2/fractionTestDriver.h"
@@ -7,9 +6,8 @@
 #include "exercise3/pvectorRunner.cpp"
 #include "utils/inputUtils.h"
 #include "exercise5/RPNRunner.h"
-#include "exercise5/RPN.h"
-#include "exercise5/RPNRunner.h"
 #include "exercise3.1/pvectorRunner_traits.cpp"
+#include "exercise3.1/psetRunner.cpp"
 
 using namespace std;
 
@@ -18,6 +16,7 @@ void runExercise2();
 void runExercise3();
 void runExercise5();
 void runExercise8();
+void runExercise9();
 
 void selectExercise()
 {
@@ -30,6 +29,7 @@ void selectExercise()
 	cout << "6 - RPN calculator with templates (2.4)" << endl;
 	cout << "7 - RPN calculator with persistent vector (2.5)" << endl;
     cout << "8 - pvector_traits with persistence_traits (3.1)" << endl;
+    cout << "9 - pset (3.1)" << endl;
 
     int exerciseNumber = 0;
     cout << "Please enter the number of the exercise that you want to run: ";
@@ -66,6 +66,9 @@ void selectExercise()
         case 8:
             runExercise8();
             break;
+
+        case 9:
+            runExercise9();
 
         default:
             cout << "Exercise " << exerciseNumber << " does not exist" << endl;
@@ -149,5 +152,11 @@ void runExercise5(){
 void runExercise8()
 {
     pvectorRunner_traits r = pvectorRunner_traits();
+    r.run();
+}
+
+void runExercise9()
+{
+    psetRunner r = psetRunner();
     r.run();
 }
