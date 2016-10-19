@@ -8,7 +8,7 @@
 #include "utils/inputUtils.h"
 #include "exercise5/RPNRunner.h"
 #include "exercise5/RPN.h"
-#include "exercise5/RPNRunner.cpp"
+#include "exercise5/RPNRunner.h"
 #include "exercise3.1/pvectorRunner_traits.cpp"
 
 using namespace std;
@@ -120,11 +120,14 @@ void runExercise2()
 
     if (num == 1)
 	{
-        auto testDriver = fractionTestDriver();
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');        auto testDriver = fractionTestDriver();
         testDriver.run();
     }
 	else if (num == 2)
 	{
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
 		auto interactive = interactiveFraction();
 		interactive.run();
     }
@@ -138,6 +141,8 @@ void runExercise3()
 
 void runExercise5(){
     RPNRunner r = RPNRunner();
+    cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
     r.run();
 }
 

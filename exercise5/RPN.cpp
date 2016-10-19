@@ -80,7 +80,7 @@ void RPN::division()
     numberStack.push_back(numb1 / numb2);
 }
 
-void RPN::putOnStack()
+/*void RPN::putOnStack()
 {
     while(true)
     {
@@ -100,6 +100,10 @@ void RPN::putOnStack()
             break;
         }
     }
+}*/
+void RPN::putOnStack(int i){
+    numberStack.push_back(i);
+    cout << "You added the number " << i << " to the stack." << endl;
 }
 
 void RPN::popFromStack()

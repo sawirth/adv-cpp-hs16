@@ -1,6 +1,6 @@
-#ifndef ADV_CPP_HS16_RPN_H
-#define ADV_CPP_HS16_RPN_H
-
+#ifndef ADV_CPP_HS16_TEMPLATERNP_H
+#define ADV_CPP_HS16_TEMPLATERNP_H
+/*
 #include <vector>
 #include <iostream>
 #include <fstream>
@@ -8,7 +8,7 @@
 
 using namespace std;
 
-class RPN
+class templateRPN
 {
 private:
     vector <int> numberStack;
@@ -17,12 +17,12 @@ public:
     void subtraction();
     void multiplication();
     void division();
-    void putOnStack(int i);
+    void putOnStack();
     void popFromStack();
     const vector<int> &getVector() const
     {
         return numberStack;
     }
-};
+};*/
 
-#endif //ADV_CPP_HS16_RPN_H
+#endif //ADV_CPP_HS16_TEMPLATERNP_H
