@@ -6,12 +6,14 @@
 #include <algorithm>
 #include "exercise3/pvectorRunner.cpp"
 #include "utils/inputUtils.h"
+#include "exercise5/RPNRunner.cpp"
 
 using namespace std;
 
 //Declare exercise functions here and implement them at the end
 void runExercise2();
 void runExercise3();
+void runExercise5();
 
 void selectExercise()
 {
@@ -34,6 +36,7 @@ void selectExercise()
         cin.clear();
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
         selectExercise();
+        return;
     }
 
 	//Add a switch case for each exercise. Best way is to run a separate method so the switch-statement stays short
@@ -51,11 +54,15 @@ void selectExercise()
 			runExercise3();
             break;
 
+        case 5:
+            runExercise5();
+            break;
+
         default:
             cout << "Exercise " << exerciseNumber << " does not exist" << endl;
             cin.clear();
             selectExercise();
-            break;
+            return;
     }
 
     string answer;
@@ -68,8 +75,10 @@ void selectExercise()
     {
         selectExercise();
     }
-
-    cout << "Okay bye bye :)" << endl;
+    else
+    {
+        cout << "Okay bye bye :)" << endl;
+    }
     return;
 }
 
@@ -116,4 +125,9 @@ void runExercise3()
 {
 	pvectorRunner r = pvectorRunner();
 	r.run();
+}
+
+void runExercise5(){
+    RPNRunner r = RPNRunner();
+    r.run();
 }
