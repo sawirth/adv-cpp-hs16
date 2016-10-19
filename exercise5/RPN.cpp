@@ -109,4 +109,8 @@ void RPN::popFromStack()
         cout << "Removed message: " << numb << endl;
         numberStack.pop_back();
     }
+    else
+    {
+        cout << "Stack is empty." << endl;
+    }
 }

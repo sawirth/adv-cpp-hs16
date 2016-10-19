@@ -6,7 +6,8 @@
 #include <algorithm>
 #include "exercise3/pvectorRunner.cpp"
 #include "utils/inputUtils.h"
-#include "exercise5/RPNRunner.cpp"
+#include "exercise5/RPNRunner.h"
+#include "exercise5/RPN.h"
 
 using namespace std;
 
