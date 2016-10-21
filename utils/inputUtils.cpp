@@ -1,8 +1,5 @@
-//
-// Created by Sandro on 14.10.2016.
-//
-
 #include <iostream>
+#include <fstream>
 #include "inputUtils.h"
 
 using namespace std;
@@ -45,5 +42,20 @@ double utils::inputUtils::getDouble()
 			cout << "Error! Try again: ";
 		}
 	}
+}
+
+vector<string> utils::inputUtils::readWordByWordFromText(const string &filepath)
+{
+	ifstream file;
+	file.open(filepath);
+	string word;
+	vector<string> content;
+
+	while(file >> word)
+	{
+		content.push_back(word);
+	}
+
+	return content;
 }
 

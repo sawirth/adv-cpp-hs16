@@ -8,6 +8,8 @@
 #include "exercise5/RPNRunner.h"
 #include "exercise3.1/pvectorRunner_traits.cpp"
 #include "exercise3.1/psetRunner.cpp"
+#include "tests/testRunner.cpp"
+#include "3.2_spell_checker/spellChecker.h"
 
 using namespace std;
 
@@ -17,10 +19,12 @@ void runExercise3();
 void runExercise5();
 void runExercise8();
 void runExercise9();
+void runExercise10();
 
 void selectExercise()
 {
     cout << "The following exercises are currently implemented:" << endl;
+    cout << "0 - tests" << endl;
     cout << "1 - Hello World (1.1)" << endl;
     cout << "2 - Fraction (1.2)" << endl;
     cout << "3 - Persistent vector (2.1)" << endl;
@@ -30,6 +34,7 @@ void selectExercise()
 	cout << "7 - RPN calculator with persistent vector (2.5)" << endl;
     cout << "8 - pvector_traits with persistence_traits (3.1)" << endl;
     cout << "9 - pset (3.1)" << endl;
+    cout << "10 - Spell Checker (3.2)" << endl;
 
     int exerciseNumber = 0;
     cout << "Please enter the number of the exercise that you want to run: ";
@@ -47,6 +52,10 @@ void selectExercise()
 	//Add a switch case for each exercise. Best way is to run a separate method so the switch-statement stays short
     switch (exerciseNumber)
     {
+        case 0:
+            TestRunner::runTests();
+            break;
+
         case 1:
             helloWorld();
             break;
@@ -69,6 +78,11 @@ void selectExercise()
 
         case 9:
             runExercise9();
+            break;
+
+        case 10:
+            runExercise10();
+            break;
 
         default:
             cout << "Exercise " << exerciseNumber << " does not exist" << endl;
@@ -159,4 +173,9 @@ void runExercise9()
 {
     psetRunner r = psetRunner();
     r.run();
+}
+
+void runExercise10()
+{
+    spellChecker::run();
 }

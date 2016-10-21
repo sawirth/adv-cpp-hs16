@@ -28,5 +28,7 @@ set(SOURCE_FILES
         exercise3.1/pvectorRunner_traits.cpp
         exercise3.1/persistence_traits.cpp
         exercise3.1/pset.cpp 
-	    exercise3.1/psetRunner.cpp)
+	    exercise3.1/psetRunner.cpp
+		3.2_spell_checker/spellChecker.cc
+		3.2_spell_checker/spellChecker.h)
 add_executable(adv_cpp_hs16 ${SOURCE_FILES})

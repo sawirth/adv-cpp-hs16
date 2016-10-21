@@ -1,3 +1,6 @@
+#ifndef PSET_CPP
+#define PSET_CPP
+
 #include <set>
 #include <string>
 #include <fstream>
@@ -56,4 +59,17 @@ class pset
                 ofs << *first++ << endl;
             }
         }
+
+        typename set<T>::iterator find(const T &el)
+        {
+            return s.find(el);
+        }
+
+
+        bool contains(const T &el)
+        {
+            return find(el) != s.end();
+        }
 };
+
+#endif
