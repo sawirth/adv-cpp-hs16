@@ -10,6 +10,7 @@
 #include "exercise3.1/psetRunner.cpp"
 #include "tests/testRunner.cpp"
 #include "3.2_spell_checker/spellChecker.h"
+#include "3.4_connect4/connect4game.h"
 
 using namespace std;
 
@@ -20,6 +21,7 @@ void runExercise5();
 void runExercise8();
 void runExercise9();
 void runExercise10();
+void runExercise11();
 
 void selectExercise()
 {
@@ -35,6 +37,7 @@ void selectExercise()
     cout << "8 - pvector_traits with persistence_traits (3.1)" << endl;
     cout << "9 - pset (3.1)" << endl;
     cout << "10 - Spell Checker (3.2)" << endl;
+    cout << "11 - Connect 4 against Human (3.4)" << endl;
 
     int exerciseNumber = 0;
     cout << "Please enter the number of the exercise that you want to run: ";
@@ -82,6 +85,10 @@ void selectExercise()
 
         case 10:
             runExercise10();
+            break;
+
+        case 11:
+            runExercise11();
             break;
 
         default:
@@ -178,4 +185,10 @@ void runExercise9()
 void runExercise10()
 {
     spellChecker::run();
+}
+
+void runExercise11()
+{
+    connect4game game = connect4game();
+    game.startGame();
 }

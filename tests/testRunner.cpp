@@ -22,14 +22,6 @@ class TestRunner {
 
 		}
 
-		static void replace_in_pvector()
-		{
-			pvector<string> v = pvector<string>("abc");
-			v.push_back("test");
-
-
-		}
-
 	public:
 		static void runTests()
 		{

@@ -30,5 +30,6 @@ set(SOURCE_FILES
         exercise3.1/pset.cpp 
 	    exercise3.1/psetRunner.cpp
 		3.2_spell_checker/spellChecker.cc
-		3.2_spell_checker/spellChecker.h)
+		3.2_spell_checker/spellChecker.h
+		3.4_connect4/playfield.h 3.4_connect4/playfield.cpp 3.4_connect4/connect4game.cpp 3.4_connect4/connect4game.h)
 add_executable(adv_cpp_hs16 ${SOURCE_FILES})
