@@ -1,5 +1,6 @@
 #include "../exercise3.1/pset.cpp"
 #include "../exercise3/pvector.cpp"
+#include "connect4tests.cpp"
 #include <assert.h>
 
 using namespace std;
@@ -28,6 +29,9 @@ class TestRunner {
 			cout << "Starting tests.." << endl;
 
 			find_in_pset();
+
+			connect4tests tests = connect4tests();
+			tests.runTests();
 
 			cout << "All tests passed" << endl;
 		}

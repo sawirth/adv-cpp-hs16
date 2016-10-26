@@ -11,15 +11,16 @@ void connect4game::startGame()
 	cout << "Welcome to most advanced CONNECT4 game ever built!" << endl;
 
 	playfield field = playfield();
+	field.initField();
 	field.isRunning = true;
 
-	int currentPlayer = 1;
+	char currentPlayer = field.player1;
 	while(field.isRunning)
 	{
 		field.printField();
 
 		bool succesfulMove = false;
-		while(!succesfulMove)
+		while(!succesfulMove && !field.isTie())
 		{
 			//For better understanding we ask for 1 to 7 instead of 0 to 6 and then subtract 1 to get the proper value
 			cout << "Player " << currentPlayer << ": In which column you want to place your stone? 1 to 7: ";
@@ -42,21 +43,21 @@ void connect4game::startGame()
 			//Check for winner
 			field.checkForWinner();
 
-			if (currentPlayer == 1)
+			if (currentPlayer == field.player1)
 			{
-				currentPlayer = 2;
+				currentPlayer = field.player2;
 			}
 			else
 			{
-				currentPlayer = 1;
+				currentPlayer = field.player1;
 			}
 		}
 	}
 
 	field.printField();
-	int winner = field.getWinner();
+	char winner = field.getWinner();
 
-	if (winner == 0)
+	if (winner == field.none)
 	{
 		cout << "The game ended with a tie" << endl;
 	}

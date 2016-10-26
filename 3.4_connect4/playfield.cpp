@@ -1,20 +1,21 @@
 #include "playfield.h"
 #include <iostream>
 #include <rpc.h>
+#include <vector>
 
 using namespace std;
 
-bool playfield::placeStone(int player, int column)
+bool playfield::placeStone(char player, int column)
 {
 	// If the top element in this column is already occupied by another stone, the stone cannot not be placed.
-	if (playfield::rep[0][column] != 0)
+	if (playfield::rep[0][column] != playfield::none)
 	{
 		return false;
 	}
 
 	// Find empty position in column
 	int i = 0;
-	while (playfield::rep[i][column] == 0 && i < playfield::height)
+	while (playfield::rep[i][column] == playfield::none && i < playfield::height)
 	{
 		i++;
 	}
@@ -46,14 +47,14 @@ void playfield::printField()
 		cout << "\t";
 		for (int column = 0; column < playfield::width; column++)
 		{
-			int player = playfield::rep[row][column];
+			char player = playfield::rep[row][column];
 			HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-			if (player == 1)
+			if (player == playfield::player1)
 			{
 				// 4 = red
 				SetConsoleTextAttribute(hConsole, 4);
 			}
-			else if(player == 2)
+			else if(player == playfield::player2)
 			{
 				// 6 = yellow
 				SetConsoleTextAttribute(hConsole, 6);
@@ -79,7 +80,7 @@ bool playfield::isColumnFull(int column)
 {
 	for (int row = 0; row < playfield::height; row++)
 	{
-		if (rep[row][column] == 0)
+		if (rep[row][column] == playfield::none)
 		{
 			return false;
 		}
@@ -88,7 +89,7 @@ bool playfield::isColumnFull(int column)
 	return true;
 }
 
-int playfield::getWinner() const
+char playfield::getWinner() const
 {
 	return winner;
 }
@@ -130,12 +131,12 @@ void playfield::checkVertical()
 	{
 		int length = 1;
 		int row = 0;
-		int currentPlayer = rep[row][column];
+		char currentPlayer = rep[row][column];
 
 		do
 		{
-			int nextPlayer = playfield::rep[row + 1][column];
-			if (nextPlayer == currentPlayer && currentPlayer != 0)
+			char nextPlayer = playfield::rep[row + 1][column];
+			if (nextPlayer == currentPlayer && currentPlayer != playfield::none)
 			{
 				//If the next stone is from the same
 				length++;
@@ -152,6 +153,7 @@ void playfield::checkVertical()
 
 		if (length == 4)
 		{
+			cout << "Vertical win" << endl;
 			playfield::winner = currentPlayer;
 			playfield::isRunning = false;
 			return;
@@ -166,12 +168,12 @@ void playfield::checkHorizontal()
 	{
 		int length = 1;
 		int column = 0;
-		int currentPlayer = rep[row][column];
+		char currentPlayer = rep[row][column];
 
 		do
 		{
-			int nextPlayer = playfield::rep[row][column + 1];
-			if (nextPlayer == currentPlayer && currentPlayer != 0 )
+			char nextPlayer = playfield::rep[row][column + 1];
+			if (nextPlayer == currentPlayer && currentPlayer != playfield::none )
 			{
 				//If the next stone is from the same
 				length++;
@@ -188,6 +190,7 @@ void playfield::checkHorizontal()
 
 		if (length == 4)
 		{
+			cout << "Horizontal win" << endl;
 			playfield::winner = currentPlayer;
 			playfield::isRunning = false;
 			return;
@@ -203,11 +206,11 @@ void playfield::checkLeftToBottomRight()
 		int length = 1;
 		int column = 0;
 		int tempRow = row;
-		int currentPlayer = rep[tempRow][column];
+		char currentPlayer = rep[tempRow][column];
 
 		do {
-			int nextPlayer = rep[tempRow + 1][column + 1];
-			if (nextPlayer == currentPlayer && currentPlayer != 0)
+			char nextPlayer = rep[tempRow + 1][column + 1];
+			if (nextPlayer == currentPlayer && currentPlayer != playfield::none)
 			{
 				length++;
 			}
@@ -219,10 +222,11 @@ void playfield::checkLeftToBottomRight()
 
 			tempRow++;
 			column++;
-		} while (length < 4 && column < playfield::width && tempRow < playfield::height);
+		} while (length < 4 && column < playfield::width - 1&& tempRow < playfield::height - 1);
 
 		if (length == 4)
 		{
+			cout << "LeftToBottomRight win" << endl;
 			playfield::winner = currentPlayer;
 			playfield::isRunning = false;
 			return;
@@ -238,11 +242,11 @@ void playfield::checkTopToBottomRight()
 		int length = 1;
 		int row = 0;
 		int tempColumn = column;
-		int currentPlayer = rep[row][tempColumn];
+		char currentPlayer = rep[row][tempColumn];
 
 		do {
-			int nextPlayer = rep[row + 1][tempColumn + 1];
-			if (nextPlayer == currentPlayer && currentPlayer != 0)
+			char nextPlayer = rep[row + 1][tempColumn + 1];
+			if (nextPlayer == currentPlayer && currentPlayer != playfield::none)
 			{
 				length++;
 			}
@@ -254,10 +258,11 @@ void playfield::checkTopToBottomRight()
 
 			row++;
 			tempColumn++;
-		} while (length < 4 && tempColumn < playfield::width && row < playfield::height);
+		} while (length < 4 && tempColumn < playfield::width - 1 && row < playfield::height - 1);
 
 		if (length == 4)
 		{
+			cout << "TopToBottomRight win" << endl;
 			playfield::winner = currentPlayer;
 			playfield::isRunning = false;
 			return;
@@ -273,10 +278,10 @@ void playfield::checkTopToBottomLeft()
 		int length = 1;
 		int row = 0;
 		int tempColumn = column;
-		int currentPlayer = rep[row][tempColumn];
+		char currentPlayer = rep[row][tempColumn];
 		do {
-			int nextPlayer = rep[row + 1][tempColumn - 1];
-			if (nextPlayer == currentPlayer && currentPlayer != 0)
+			char nextPlayer = rep[row + 1][tempColumn - 1];
+			if (nextPlayer == currentPlayer && currentPlayer != playfield::none)
 			{
 				length++;
 			}
@@ -288,10 +293,11 @@ void playfield::checkTopToBottomLeft()
 
 			row++;
 			tempColumn--;
-		} while (length < 4 && tempColumn > 0 && row < playfield::height);
+		} while (length < 4 && tempColumn > 0 && row < playfield::height - 1);
 
 		if (length == 4)
 		{
+			cout << "TopToBottomLeft win" << endl;
 			playfield::winner = currentPlayer;
 			playfield::isRunning = false;
 			return;
@@ -307,11 +313,11 @@ void playfield::checkRightToBottomLeft()
 		int length = 1;
 		int column = playfield::width - 1;
 		int tempRow = row;
-		int currentPlayer = rep[tempRow][column];
+		char currentPlayer = rep[tempRow][column];
 
 		do {
-			int nextPlayer = rep[tempRow + 1][column - 1];
-			if (nextPlayer == currentPlayer && currentPlayer != 0)
+			char nextPlayer = rep[tempRow + 1][column - 1];
+			if (nextPlayer == currentPlayer && currentPlayer != playfield::none)
 			{
 				length++;
 			}
@@ -323,13 +329,40 @@ void playfield::checkRightToBottomLeft()
 
 			tempRow++;
 			column--;
-		} while (length < 4 && column > 0 && tempRow < playfield::height);
+		} while (length < 4 && column > 0 && tempRow < playfield::height - 1);
 
 		if (length == 4)
 		{
+			cout << "RightToBottomLeft win" << endl;
 			playfield::winner = currentPlayer;
 			playfield::isRunning = false;
 			return;
 		}
 	}
+}
+
+void playfield::initField()
+{
+	for (int row = 0; row < playfield::height; row++)
+	{
+		for (int column = 0; column < playfield::width; column++)
+		{
+			playfield::rep[row][column] = playfield::none;
+		}
+	}
+}
+
+bool playfield::isTie()
+{
+	for (int column = 0; column < playfield::width; column++)
+	{
+		if (!isColumnFull(column))
+		{
+			return false;
+		}
+	}
+
+	playfield::winner = playfield::none;
+	playfield::isRunning = false;
+	return true;
 }
