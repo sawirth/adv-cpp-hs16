@@ -35,5 +35,5 @@ set(SOURCE_FILES
 		3.4_connect4/playfield.cpp
 		3.4_connect4/connect4game.cpp
 		3.4_connect4/connect4game.h
-		tests/connect4tests.cpp)
+		tests/connect4tests.cpp 3.4_connect4/player.cpp)
 add_executable(adv_cpp_hs16 ${SOURCE_FILES})
