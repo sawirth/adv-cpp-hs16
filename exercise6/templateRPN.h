@@ -160,6 +160,18 @@ public:
         }
     }
 
+    T myMin2() {
+        if(numberStack.empty()){
+            cout << "No numbers in the stack." << endl;
+            return 0;
+        }
+        T min1 = numberStack.back();
+        for_each(numberStack.begin(), numberStack.end(), [&](T &cur){
+            if(cur < min1){min1 = cur;}});
+        cout << "The minimum of the whole stack is: " << min1 << "." << endl;
+        return min1;
+    }
+
     /*void mymin(){
         T *a = nullptr;
         T *b = nullptr;

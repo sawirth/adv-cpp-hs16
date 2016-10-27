@@ -43,8 +43,5 @@ set(SOURCE_FILES
         exercise6/templateRPN.h
         exercise3.1/persistence_traits.cpp
         exercise6/templateRPNRunner.cpp
-        exercise6/templateRPNRunner.h 
-		exercise3.3/minForEachRPN.h
-		exercise3.3/minForEachRPNRunner.cpp
-		exercise3.3/minForEachRPNRunner.h)
+        exercise6/templateRPNRunner.h)
 add_executable(adv_cpp_hs16 ${SOURCE_FILES})

@@ -16,6 +16,7 @@ void templateRPNRunner::run()
         cout << "n - puts a type you chose"<< endl;
         cout << "d - removes last number from the stack" << endl;
         cout << "m - gets the minimum from the last two operations" << endl;
+        cout << "m2 - gets the minimum from the whole stack (3.3)" << endl;
         cout << "Or just simply do some operations on the last two numbers from the stack: '+', '-', '*', '/'" << endl;
         cout << "Whitespace is essential between the different operations." << endl;
         string typedLine;
@@ -38,10 +39,25 @@ void templateRPNRunner::run()
                 }
                 else if(typeid(stack.getNumberStack())== typeid(fraction))
                 {
-                int nominator = (stoi(sub));
-                iss >> sub;
-                fraction fraction1 = fraction(nominator, stoi(sub));
-                stack.putOnStack(fraction1);
+                    string delimiter = "/";
+                    if (sub.find(delimiter) != string::npos)
+                    {
+                        string ctr = sub.substr(0, sub.find(delimiter));
+                        string denom = sub.substr(sub.find(delimiter) + 1, sub.length() - 1);
+                        try {
+                            int counter = stoi(ctr);
+                            int denominator = stoi(denom);
+                            stack.putOnStack(fraction(counter, denominator));
+                        }
+                        catch (invalid_argument e)
+                        {
+                            cout << "invalid_argument exception while parsing: " << ctr << " " << denom << endl;
+                            cin.clear();
+                        }
+                    } else
+                    {
+                        cout << "No possible Input." << endl << "You need to enter the counter and denominator in the following form: 1/2." << endl;
+                    }
                 }
             } else if (sub == "d") {
                 stack.popFromStack();
@@ -55,12 +71,14 @@ void templateRPNRunner::run()
                 stack.division();
             } else if (sub == "m") {
                 stack.myMin();
+            } else if (sub == "m2") {
+                stack.myMin2();
             /*} else if (sub == "all+"){
                 stack.allPlus();
             } else if (sub == "all*"){
                     stack.allMultiplicate();*/
             } else {
-                    cout << "No possible input, try again." << endl << "Possibly you forgot some whitespace." << endl;
+                    cout << "No possible input, try again." << endl << "Be careful with whitespaces!" << endl;
             }
             }
         }

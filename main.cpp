@@ -15,7 +15,6 @@
 #include "exercise5/RPN.h"
 #include "exercise5/RPNRunner.h"
 #include "exercise6/templateRPNRunner.h"
-#include "exercise3.3/minForEachRPNRunner.h"
 
 
 using namespace std;
@@ -42,13 +41,12 @@ void selectExercise()
     cout << "3 - Persistent vector (2.1)" << endl;
 	cout << "4 - Inline (2.2)" << endl;
 	cout << "5 - RPN calculator (2.3)" << endl;
-	cout << "6 - RPN calculator with templates (2.4)" << endl;
+	cout << "6 - RPN calculator with templates (2.4), additionally (3.3) is also included" << endl;
 	cout << "7 - RPN calculator with persistent vector (2.5)" << endl;
     cout << "8 - pvector_traits with persistence_traits (3.1)" << endl;
     cout << "9 - pset (3.1)" << endl;
     cout << "10 - Spell Checker (3.2)" << endl;
-    cout << "11 - std::for_each Min (3.3)" << endl;
-    cout << "12 - Connect 4 against Human (3.4)" << endl;
+    cout << "11 - Connect 4 against Human (3.4)" << endl;
 
 
     int exerciseNumber = 0;
@@ -223,15 +221,12 @@ void runExercise10()
     spellChecker::run();
 }
 
-void runExercise11(){
-    minForEachRPNRunner r = minForEachRPNRunner();
-    cin.clear();
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
-    r.run();
-}
-
-void runExercise12() {
+void runExercise11() {
     connect4game game = connect4game();
     game.startGame();
+}
+
+void runExercise12(){
+    // to be done
 }
 

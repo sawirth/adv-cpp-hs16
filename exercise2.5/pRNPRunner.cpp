@@ -47,10 +47,25 @@ void pRNPRunner::run()
                 }
                 else if(type == "fraction")
                 {
-                    int nominator = (stoi(sub));
-                    iss >> sub;
-                    fraction fraction1 = fraction(nominator, stoi(sub));
-                    pRNP.putOnStack(fraction1);
+                    string delimiter = "/";
+                    if (sub.find(delimiter) != string::npos)
+                    {
+                        string ctr = sub.substr(0, sub.find(delimiter));
+                        string denom = sub.substr(sub.find(delimiter) + 1, sub.length() - 1);
+                        try {
+                            int counter = stoi(ctr);
+                            int denominator = stoi(denom);
+                            pRNP.putOnStack(fraction(counter, denominator));
+                        }
+                        catch (invalid_argument e)
+                        {
+                            cout << "invalid_argument exception while parsing: " << ctr << " " << denom << endl;
+                            cin.clear();
+                        }
+                    } else
+                    {
+                        cout << "No possible Input." << endl << "You need to enter the counter and denominator in the following form: 1/2." << endl;
+                    }
                 }
             } else if (sub == "d")
             {
@@ -69,10 +84,10 @@ void pRNPRunner::run()
                 pRNP.division();
             } else if (sub == "m")
             {
-                pRNP.mymin();
+                pRNP.myMin();
             } else
             {
-                cout << "No possible input, try again." << endl << "Possibly you forgot some whitespace." << endl;
+                cout << "No possible input, try again." << endl << "Be careful with whitespaces!" << endl;
             }
         }
     }

@@ -150,31 +150,38 @@ public:
         cout << "You added the number " << i << " to the stack." << endl;
     }
 
-    void mymin() {
+    T myMin() {
         T *a = nullptr;
         T *b = nullptr;
-        if (!getNumberStack().empty()) {
+        if (getSize() > 1) {
             a = new T;
             *a = getNumberStack()[getSize() - 1];
-            numberStack.pop_back();
-        }
-        if (!getNumberStack().empty()) {
             b = new T;
-            *b = getNumberStack()[getSize() - 1];
-            numberStack.pop_back();
+            *b = getNumberStack()[getSize() - 2];
         } else {
-            if (a != nullptr) {
-                numberStack.push_back(*a);
-            }
             cout << "Stack doesn't have 2 numbers to get the minimum." << endl;
+            return 0;
         }
         if (*a < *b) {
-            numberStack.push_back(*a);
             cout << "The smaller one of " << *a << " and " << *b << " is " << *a << "." << endl;
+            return *a;
         } else {
             cout << "The smaller one of " << *a << " and " << *b << " is " << *b << "." << endl;
+            return *b;
         }
     }
+
+   /* T myMin2() {
+        if(getNumberStack().empty()){
+            cout << "No numbers in the stack." << endl;
+            return 0;
+        }
+        T min1 = getNumberStack().back();
+        for_each(getNumberStack().begin(), getNumberStack().end(), [&](T &cur){
+            if(cur < min1){min1 = cur;}});
+        cout << "The minimum of the whole stack is: " << min1 << "." << endl;
+        return min1;
+    }*/
 
     /*T allPlus ()
     {
