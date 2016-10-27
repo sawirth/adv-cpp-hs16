@@ -1,8 +1,8 @@
+#include <typeinfo>
 #include <iostream>
 #include "templateRPN.h"
 #include "templateRPNRunner.h"
-#include "../utils/inputUtils.h"
-#include "../exercise2/fraction.h"
+
 using namespace std;
 
 void templateRPNRunner::run()

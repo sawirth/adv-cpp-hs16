@@ -8,19 +8,19 @@ using namespace std;
 bool playfield::placeStone(char player, int column)
 {
 	// If the top element in this column is already occupied by another stone, the stone cannot not be placed.
-	if (playfield::rep[0][column] != playfield::none)
+	if (playfield::rep[column][0] != playfield::none)
 	{
 		return false;
 	}
 
 	// Find empty position in column
 	int i = 0;
-	while (playfield::rep[i][column] == playfield::none && i < playfield::height)
+	while (playfield::rep[column][i] == playfield::none && i < playfield::height)
 	{
 		i++;
 	}
 
-	playfield::rep[i - 1][column] = player;
+	playfield::rep[column][i - 1] = player;
 	return true;
 }
 
@@ -47,7 +47,7 @@ void playfield::printField()
 		cout << "\t";
 		for (int column = 0; column < playfield::width; column++)
 		{
-			char player = playfield::rep[row][column];
+			char player = playfield::rep[column][row];
 			//HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 			/*if (player == playfield::player1)
 			{
@@ -80,7 +80,7 @@ bool playfield::isColumnFull(int column)
 {
 	for (int row = 0; row < playfield::height; row++)
 	{
-		if (rep[row][column] == playfield::none)
+		if (rep[column][row] == playfield::none)
 		{
 			return false;
 		}
@@ -135,7 +135,7 @@ void playfield::checkVertical()
 
 		do
 		{
-			char nextPlayer = playfield::rep[row + 1][column];
+			char nextPlayer = playfield::rep[column][row + 1];
 			if (nextPlayer == currentPlayer && currentPlayer != playfield::none)
 			{
 				//If the next stone is from the same
@@ -168,11 +168,11 @@ void playfield::checkHorizontal()
 	{
 		int length = 1;
 		int column = 0;
-		char currentPlayer = rep[row][column];
+		char currentPlayer = rep[column][row];
 
 		do
 		{
-			char nextPlayer = playfield::rep[row][column + 1];
+			char nextPlayer = playfield::rep[column + 1][row];
 			if (nextPlayer == currentPlayer && currentPlayer != playfield::none )
 			{
 				//If the next stone is from the same
@@ -206,10 +206,10 @@ void playfield::checkLeftToBottomRight()
 		int length = 1;
 		int column = 0;
 		int tempRow = row;
-		char currentPlayer = rep[tempRow][column];
+		char currentPlayer = rep[column][tempRow];
 
 		do {
-			char nextPlayer = rep[tempRow + 1][column + 1];
+			char nextPlayer = rep[column + 1][tempRow + 1];
 			if (nextPlayer == currentPlayer && currentPlayer != playfield::none)
 			{
 				length++;
@@ -237,15 +237,15 @@ void playfield::checkLeftToBottomRight()
 void playfield::checkTopToBottomRight()
 {
 	//Not each column must be checked because not each diagonal has 4 fields but for better understanding each diagonal will be checked
-	for (int column = 0; column < playfield::height; column++)
+	for (int column = 0; column < playfield::width; column++)
 	{
 		int length = 1;
 		int row = 0;
 		int tempColumn = column;
-		char currentPlayer = rep[row][tempColumn];
+		char currentPlayer = rep[tempColumn][row];
 
 		do {
-			char nextPlayer = rep[row + 1][tempColumn + 1];
+			char nextPlayer = rep[tempColumn + 1][row + 1];
 			if (nextPlayer == currentPlayer && currentPlayer != playfield::none)
 			{
 				length++;
@@ -278,9 +278,9 @@ void playfield::checkTopToBottomLeft()
 		int length = 1;
 		int row = 0;
 		int tempColumn = column;
-		char currentPlayer = rep[row][tempColumn];
+		char currentPlayer = rep[tempColumn][row];
 		do {
-			char nextPlayer = rep[row + 1][tempColumn - 1];
+			char nextPlayer = rep[tempColumn - 1][row + 1];
 			if (nextPlayer == currentPlayer && currentPlayer != playfield::none)
 			{
 				length++;
@@ -313,10 +313,10 @@ void playfield::checkRightToBottomLeft()
 		int length = 1;
 		int column = playfield::width - 1;
 		int tempRow = row;
-		char currentPlayer = rep[tempRow][column];
+		char currentPlayer = rep[column][tempRow];
 
 		do {
-			char nextPlayer = rep[tempRow + 1][column - 1];
+			char nextPlayer = rep[column - 1][tempRow + 1];
 			if (nextPlayer == currentPlayer && currentPlayer != playfield::none)
 			{
 				length++;
@@ -347,7 +347,7 @@ void playfield::initField()
 	{
 		for (int column = 0; column < playfield::width; column++)
 		{
-			playfield::rep[row][column] = playfield::none;
+			playfield::rep[column][row] = playfield::none;
 		}
 	}
 }

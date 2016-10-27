@@ -1,4 +1,5 @@
 #include <iostream>
+#include <limits>
 #include "pRNP.h"
 #include "../exercise2/fraction.h"
 #include "pRNPRunner.h"

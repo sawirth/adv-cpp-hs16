@@ -7,6 +7,7 @@
 #include <sstream>
 #include "../exercise2/fraction.h"
 #include <numeric>
+#include <algorithm>
 
 
 using namespace std;
@@ -17,11 +18,12 @@ class templateRNP
 private:
     vector <T> numberStack;
 public:
-    T getNumberStack()
+    const vector<T> &getNumberStack() const
     {
         return numberStack;
     }
-    void popFromStack()
+
+        void popFromStack()
     {
         if (!numberStack.empty()) {
             T numb = numberStack[numberStack.size() - 1];

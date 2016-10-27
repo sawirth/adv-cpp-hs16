@@ -21,7 +21,7 @@ class playfield
 		void checkRightToBottomLeft();
 
 	public:
-		char rep[playfield::height][playfield::width];
+		char rep[playfield::width][playfield::height];
 
 	public:
 		char stoneat(int x, int y) const
