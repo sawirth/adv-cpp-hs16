@@ -37,11 +37,13 @@ set(SOURCE_FILES
 		3.4_connect4/playfield.cpp
 		3.4_connect4/connect4game.cpp
 		3.4_connect4/connect4game.h
-		tests/connect4tests.cpp 
+		tests/connect4tests.cpp
 		3.4_connect4/player.cpp
         exercise6/templateRPN.cpp
         exercise6/templateRPN.h
         exercise3.1/persistence_traits.cpp
         exercise6/templateRPNRunner.cpp
-        exercise6/templateRPNRunner.h)
+        exercise6/templateRPNRunner.h
+		3.4_connect4/humanPlayer.cpp
+		3.4_connect4/computerPlayer.cpp)
 add_executable(adv_cpp_hs16 ${SOURCE_FILES})

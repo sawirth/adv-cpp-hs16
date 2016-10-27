@@ -2,6 +2,9 @@
 #include "playfield.h"
 #include "../utils/inputUtils.h"
 #include <iostream>
+#include <queue>
+#include "humanPlayer.cpp"
+#include "computerPlayer.cpp"
 
 using namespace std;
 
@@ -9,12 +12,56 @@ void connect4game::startGame()
 {
 	cout << endl;
 	cout << "Welcome to most advanced CONNECT4 game ever built!" << endl;
+	cout << "The following game modes are available:" << endl;
+	cout << "1 - Human vs. Human" << endl;
+	cout << "2 - Human vs. Computer" << endl;
+	cout << "3 - Computer vs. Computer" << endl;
+	cout << "Which mode do you want to play? ";
+	int mode = utils::inputUtils::getInt();
 
+	if (mode < 1 || mode > 3)
+	{
+		cout << "Wrong number!" << endl;
+		startGame();
+	}
+
+	switch(mode)
+	{
+		case 1:
+			{
+				humanPlayer<playfield> p1 = humanPlayer<playfield>();
+				humanPlayer<playfield> p2 = humanPlayer<playfield>();
+				startGame(p1, p2);
+			}
+			break;
+
+		case 2:
+			{
+				humanPlayer<playfield> p1 = humanPlayer<playfield>();
+				computerPlayer<playfield> p2 = computerPlayer<playfield>();
+				startGame(p1, p2);
+			}
+			break;
+
+		case 3:
+			cout << "Mode not yet implemented.." << endl;
+			break;
+
+		default:
+			cout << "Something went wrong.. :S" << endl;
+			break;
+	}
+
+	cout << "Thanks for playing :)" << endl;
+}
+
+void connect4game::startGame(player<playfield> &player1, player<playfield> &player2)
+{
 	playfield field = playfield();
 	field.initField();
 	field.isRunning = true;
 
-	char currentPlayer = field.player1;
+	int currentPlayer = 1;
 	while(field.isRunning)
 	{
 		field.printField();
@@ -22,9 +69,15 @@ void connect4game::startGame()
 		bool succesfulMove = false;
 		while(!succesfulMove && !field.isTie())
 		{
-			//For better understanding we ask for 1 to 7 instead of 0 to 6 and then subtract 1 to get the proper value
-			cout << "Player " << currentPlayer << ": In which column you want to place your stone? 1 to 7: ";
-			int column = utils::inputUtils::getInt() - 1;
+			int column;
+			if (currentPlayer == 1)
+			{
+				column = player1.play(field);
+			}
+			else
+			{
+				column = player2.play(field);
+			}
 
 			if (column < 0 || column > 6)
 			{
@@ -38,18 +91,18 @@ void connect4game::startGame()
 				continue;
 			}
 
-			succesfulMove = field.placeStone(currentPlayer, column);
+			succesfulMove = field.placeStone(column);
 
 			//Check for winner
 			field.checkForWinner();
 
-			if (currentPlayer == field.player1)
+			if (currentPlayer == 1)
 			{
-				currentPlayer = field.player2;
+				currentPlayer = 2;
 			}
 			else
 			{
-				currentPlayer = field.player1;
+				currentPlayer = 1;
 			}
 		}
 	}

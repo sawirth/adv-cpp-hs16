@@ -5,7 +5,7 @@
 
 using namespace std;
 
-bool playfield::placeStone(char player, int column)
+bool playfield::placeStone(int column)
 {
 	// If the top element in this column is already occupied by another stone, the stone cannot not be placed.
 	if (playfield::rep[column][0] != playfield::none)
@@ -20,7 +20,18 @@ bool playfield::placeStone(char player, int column)
 		i++;
 	}
 
-	playfield::rep[column][i - 1] = player;
+	playfield::rep[column][i - 1] = currentPlayerChar;
+
+	//Switch the symbol of the current player so the player doesn't have to worry about this
+	if (currentPlayerChar == player1)
+	{
+		currentPlayerChar = player2;
+	}
+	else
+	{
+		currentPlayerChar = player1;
+	}
+
 	return true;
 }
 
@@ -365,4 +376,9 @@ bool playfield::isTie()
 	playfield::winner = playfield::none;
 	playfield::isRunning = false;
 	return true;
+}
+
+char playfield::getCurrentPlayerChar() const
+{
+	return currentPlayerChar;
 }

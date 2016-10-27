@@ -13,6 +13,7 @@ class playfield
 
 	private:
 		char winner;
+		char currentPlayerChar = player1;
 		void checkVertical();
 		void checkHorizontal();
 		void checkLeftToBottomRight();
@@ -31,7 +32,7 @@ class playfield
 
 		//The player can choose in which column he wants to place the stone
 		//Returns: true if successful, else false
-		bool placeStone(char player, int column);
+		bool placeStone(int column);
 
 		void printField();
 
@@ -45,6 +46,8 @@ class playfield
 		void initField();
 
 		bool isTie();
+
+		char getCurrentPlayerChar() const;
 };
 
 #endif //ADV_CPP_HS16_PLAYFIELD_H
