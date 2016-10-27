@@ -83,6 +83,32 @@ void fraction::shorten()
     setDenominator(getDenominator() / c);
 }
 
+// for exercise 6
+
+bool fraction::operator<(fraction otherFraction){
+    double frac1 = (double) getCounter() / (double)getDenominator();
+    double frac2 = (double) otherFraction.getCounter() / (double) otherFraction.getDenominator();
+    if (frac1 < frac2) {
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
+fraction fraction::operator*(double otherDouble)
+{
+    fraction f = fraction((int)(getCounter() * otherDouble), getDenominator());
+    f.shorten();
+    return f;
+}
+
+fraction fraction::operator+(double otherDouble)
+{
+    fraction f = fraction((int)(getCounter() + getDenominator()* otherDouble), getDenominator());
+    f.shorten();
+    return f;
+}
 
 
 

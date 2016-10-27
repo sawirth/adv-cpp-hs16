@@ -2,6 +2,7 @@
 #include "exercise1/HelloWorld.h"
 #include "exercise2/fractionTestDriver.h"
 #include "exercise2/interactiveFraction.h"
+#include "exercise2.5/pRNPRunner.h"
 #include <algorithm>
 #include "exercise3/pvectorRunner.cpp"
 #include "utils/inputUtils.h"
@@ -11,6 +12,11 @@
 #include "tests/testRunner.cpp"
 #include "3.2_spell_checker/spellChecker.h"
 #include "3.4_connect4/connect4game.h"
+#include "exercise5/RPN.h"
+#include "exercise5/RPNRunner.h"
+#include "exercise6/templateRPNRunner.h"
+#include "exercise3.3/minForEachRPNRunner.h"
+
 
 using namespace std;
 
@@ -18,10 +24,14 @@ using namespace std;
 void runExercise2();
 void runExercise3();
 void runExercise5();
+void runExercise6();
+void runExercise7();
 void runExercise8();
 void runExercise9();
 void runExercise10();
 void runExercise11();
+void runExercise12();
+
 
 void selectExercise()
 {
@@ -37,7 +47,9 @@ void selectExercise()
     cout << "8 - pvector_traits with persistence_traits (3.1)" << endl;
     cout << "9 - pset (3.1)" << endl;
     cout << "10 - Spell Checker (3.2)" << endl;
-    cout << "11 - Connect 4 against Human (3.4)" << endl;
+    cout << "11 - std::for_each Min (3.3)" << endl;
+    cout << "12 - Connect 4 against Human (3.4)" << endl;
+
 
     int exerciseNumber = 0;
     cout << "Please enter the number of the exercise that you want to run: ";
@@ -75,6 +87,14 @@ void selectExercise()
             runExercise5();
             break;
 
+        case 6:
+            runExercise6();
+            break;
+
+        case 7:
+            runExercise7();
+            break;
+
         case 8:
             runExercise8();
             break;
@@ -90,6 +110,9 @@ void selectExercise()
         case 11:
             runExercise11();
             break;
+
+        case 12:
+            runExercise12();
 
         default:
             cout << "Exercise " << exerciseNumber << " does not exist" << endl;
@@ -170,8 +193,21 @@ void runExercise5(){
     r.run();
 }
 
-void runExercise8()
-{
+void runExercise6(){
+    templateRPNRunner r = templateRPNRunner();
+    cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    r.run();
+}
+
+void runExercise7(){
+    pRNPRunner r = pRNPRunner();
+    cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    r.run();
+}
+
+void runExercise8() {
     pvectorRunner_traits r = pvectorRunner_traits();
     r.run();
 }
@@ -187,8 +223,15 @@ void runExercise10()
     spellChecker::run();
 }
 
-void runExercise11()
-{
+void runExercise11(){
+    minForEachRPNRunner r = minForEachRPNRunner();
+    cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    r.run();
+}
+
+void runExercise12() {
     connect4game game = connect4game();
     game.startGame();
 }
+

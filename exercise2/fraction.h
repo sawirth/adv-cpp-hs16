@@ -34,6 +34,13 @@ public:
     friend std::ostream &operator<<(std::ostream &os, const fraction &fraction);
 
     friend std::istream &operator>>(std::istream &is, fraction &fraction);
+
+    //for exercise 6
+    bool operator<(fraction otherFraction);
+    operator double(){return (double)counter/denominator;}
+
+    fraction operator+(double otherDouble);
+    fraction operator*(double otherDouble);
 };
 
 

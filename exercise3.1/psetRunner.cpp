@@ -6,7 +6,7 @@ using namespace std;
 class psetRunner
 {
     public:
-        run()
+        void run()
         {
             cout << "Enter path with filename where you want to store your data:" << endl;
             string path = "";

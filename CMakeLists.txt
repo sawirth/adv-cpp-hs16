@@ -14,16 +14,18 @@ set(SOURCE_FILES
         exercise2/fractionTestDriver.h
         exercise2/interactiveFraction.cpp
         exercise2/interactiveFraction.h
-        utils/inputUtils.cpp 
-	    utils/inputUtils.h
+        exercise2.5/pRNP.h
+        exercise2.5/pvectorRNP.h
+        exercise2.5/pRNPRunner.cpp
+        exercise2.5/pRNPRunner.h
+        utils/inputUtils.cpp
+	 	utils/inputUtils.h
         exercise3/pvector.cpp
         exercise3/pvectorRunner.cpp
         exercise5/RPN.cpp
         exercise5/RPNRunner.cpp
         exercise5/RPN.h
         exercise5/RPNRunner.h
-        exercise6/templateRNP.cpp
-        exercise6/templateRNP.h
         exercise3.1/pvector_traits.cpp
         exercise3.1/pvectorRunner_traits.cpp
         exercise3.1/persistence_traits.cpp
@@ -35,5 +37,14 @@ set(SOURCE_FILES
 		3.4_connect4/playfield.cpp
 		3.4_connect4/connect4game.cpp
 		3.4_connect4/connect4game.h
-		tests/connect4tests.cpp 3.4_connect4/player.cpp)
+		tests/connect4tests.cpp 
+		3.4_connect4/player.cpp
+        exercise6/templateRPN.cpp
+        exercise6/templateRPN.h
+        exercise3.1/persistence_traits.cpp
+        exercise6/templateRPNRunner.cpp
+        exercise6/templateRPNRunner.h 
+		exercise3.3/minForEachRPN.h
+		exercise3.3/minForEachRPNRunner.cpp
+		exercise3.3/minForEachRPNRunner.h)
 add_executable(adv_cpp_hs16 ${SOURCE_FILES})

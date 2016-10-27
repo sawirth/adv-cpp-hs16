@@ -5,13 +5,16 @@ template<typename F>
 class player
 {
 	public:
-		int play(const F &field);
+		int play(const F &field)
+		{
+			return 0;
+		}
 };
 
-template<typename F>
+/*template<typename F>
 int player::play(const F &field)
 {
 	return 0;
-}
+}*/
 
 #endif //ADV_CPP_HS16_PLAYER_H

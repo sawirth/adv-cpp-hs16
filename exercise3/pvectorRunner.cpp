@@ -10,6 +10,8 @@ class pvectorRunner
 			cin >> path;
 
 			pvector<string> v = pvector<string>(path);
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
 			bool quit = false;
 			while(!quit)
@@ -18,6 +20,8 @@ class pvectorRunner
 				cout << "a(dd) - p(op) - d(elete) - q(uit)" << endl;
 				string choice = "";
 				cin >> choice;
+				cin.clear();
+				cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
 				if (choice == "q")
 				{

@@ -17,6 +17,10 @@ void RPN::addition()
         numb2 = numberStack[numberStack.size() - 1];
         numberStack.pop_back();
     } else {
+        if(numb1 != 0)
+        {
+        numberStack.push_back(numb1);
+        }
         cout << "Stack doesn't have 2 numbers to sum up" << endl;
         return;
     }
@@ -36,6 +40,10 @@ void RPN::subtraction()
         numb2 = numberStack[numberStack.size() - 1];
         numberStack.pop_back();
     } else {
+        if(numb1 != 0)
+        {
+            numberStack.push_back(numb1);
+        }
         cout << "Stack doesn't have 2 numbers to subtract" << endl;
         return;
     }
@@ -54,6 +62,10 @@ void RPN::multiplication()
         numb2 = numberStack[numberStack.size() - 1];
         numberStack.pop_back();
     } else {
+        if(numb1 != 0)
+        {
+            numberStack.push_back(numb1);
+        }
         cout << "Stack doesn't have 2 numbers to multiply" << endl;
         return;
     }
@@ -73,6 +85,10 @@ void RPN::division()
         numb2 = numberStack[numberStack.size() - 1];
         numberStack.pop_back();
     } else {
+        if(numb1 != 0)
+        {
+            numberStack.push_back(numb1);
+        }
         cout << "Stack doesn't have 2 numbers to divide" << endl;
         return;
     }

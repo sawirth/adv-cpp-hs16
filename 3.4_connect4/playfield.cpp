@@ -1,6 +1,6 @@
 #include "playfield.h"
 #include <iostream>
-#include <rpc.h>
+//#include <rpc.h>
 #include <vector>
 
 using namespace std;
@@ -48,8 +48,8 @@ void playfield::printField()
 		for (int column = 0; column < playfield::width; column++)
 		{
 			char player = playfield::rep[row][column];
-			HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-			if (player == playfield::player1)
+			//HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+			/*if (player == playfield::player1)
 			{
 				// 4 = red
 				SetConsoleTextAttribute(hConsole, 4);
@@ -58,11 +58,11 @@ void playfield::printField()
 			{
 				// 6 = yellow
 				SetConsoleTextAttribute(hConsole, 6);
-			}
+			}*/
 			cout << player;
 
 			// Set back to white
-			SetConsoleTextAttribute(hConsole, 15);
+			//SetConsoleTextAttribute(hConsole, 15);
 
 			if (column < playfield::width - 1)
 			{
