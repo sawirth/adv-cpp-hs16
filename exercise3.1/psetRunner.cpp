@@ -1,5 +1,7 @@
 #include <iostream>
 #include "pset.cpp"
+#include "../exercise3.1/persistence_traits.cpp"
+
 
 using namespace std;
 
@@ -11,8 +13,10 @@ class psetRunner
             cout << "Enter path with filename where you want to store your data:" << endl;
             string path = "";
             cin >> path;
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-            pset<string> s = pset<string>(path);
+            pset<string, persistence_traits<string> > s = pset<string, persistence_traits<string>>(path);
 
             bool quit = false;
             while(!quit)
@@ -20,6 +24,8 @@ class psetRunner
                 cout << "What do you want to do? a = add, q = quit: ";
                 string choice = "";
                 cin >> choice;
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
                 if (choice != "a")
                 {

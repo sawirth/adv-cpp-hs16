@@ -4,7 +4,7 @@
 using namespace std;
 
 spellChecker::spellChecker(const string &dictionary_filename) : dictionary_filename(
-		dictionary_filename), dictionarySet(pset<string>(dictionary_filename))
+		dictionary_filename), dictionarySet(pset<string, persistence_traits<string>>(dictionary_filename))
 {
 }
 

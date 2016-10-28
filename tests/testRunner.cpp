@@ -9,7 +9,7 @@ class TestRunner {
 	private:
 		static void find_in_pset()
 		{
-			pset<string> s = pset<string>("abc");
+			pset<string, persistence_traits<string>> s = pset<string, persistence_traits<string>>("abc");
 			s.insert("hello");
 			s.insert("world");
 

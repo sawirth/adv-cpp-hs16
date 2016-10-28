@@ -9,6 +9,8 @@ class pvectorRunner_traits
 			cout << "Enter path with filename where you want to store your data:" << endl;
 			string path = "";
 			cin >> path;
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
 			pvector_traits<string, persistence_traits<string> > v = pvector_traits<string, persistence_traits<string> >(path);
 
@@ -19,6 +21,8 @@ class pvectorRunner_traits
 				cout << "a(dd) - p(op) - d(elete) - q(uit)" << endl;
 				string choice = "";
 				cin >> choice;
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
 				if (choice == "q")
 				{

@@ -15,6 +15,8 @@
 #include "exercise5/RPN.h"
 #include "exercise5/RPNRunner.h"
 #include "exercise6/templateRPNRunner.h"
+#include "exercise4.1/merger.h"
+#include <list>
 
 
 using namespace std;
@@ -30,6 +32,8 @@ void runExercise9();
 void runExercise10();
 void runExercise11();
 void runExercise12();
+void runExercise13();
+
 
 
 void selectExercise()
@@ -47,6 +51,8 @@ void selectExercise()
     cout << "9 - pset (3.1)" << endl;
     cout << "10 - Spell Checker (3.2)" << endl;
     cout << "11 - Connect 4 against Human (3.4)" << endl;
+    cout << "12 - Connect 4 against Computer (3.5)" << endl;
+    cout << "13 - Merging STL Containers" << endl;
 
 
     int exerciseNumber = 0;
@@ -111,6 +117,11 @@ void selectExercise()
 
         case 12:
             runExercise12();
+            break;
+
+        case 13:
+            runExercise13();
+            break;
 
         default:
             cout << "Exercise " << exerciseNumber << " does not exist" << endl;
@@ -221,12 +232,29 @@ void runExercise10()
     spellChecker::run();
 }
 
-void runExercise11() {
+void runExercise11()
+{
     connect4game game = connect4game();
     game.startGame();
 }
 
-void runExercise12(){
+void runExercise12()
+{
     // to be done
 }
 
+void runExercise13()
+{
+    merger<vector<fraction>,list<fraction>,fraction> merger1;
+    vector<fraction> v1;
+    v1.push_back(fraction(3,4));
+    v1.push_back(fraction(5,7));
+    v1.push_back(fraction(8,9));
+    list<fraction> v2;
+    v2.push_back(fraction(1,2));
+    v2.push_back(fraction(4,7));
+    v2.push_back(fraction(12,13));
+    vector<fraction> v3;
+    merger1.merge(v1, v2, v3);
+    cout << v3[0] << endl << v3[1] << endl << v3[2] << endl << v3[3] << endl << v3[4] << endl << v3[5] << endl;
+}

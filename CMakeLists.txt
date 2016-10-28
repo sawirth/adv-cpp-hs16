@@ -43,7 +43,9 @@ set(SOURCE_FILES
         exercise6/templateRPN.h
         exercise3.1/persistence_traits.cpp
         exercise6/templateRPNRunner.cpp
-        exercise6/templateRPNRunner.h
 		3.4_connect4/humanPlayer.cpp
-		3.4_connect4/computerPlayer.cpp)
+		3.4_connect4/computerPlayer.cpp
+        exercise6/templateRPNRunner.h
+		exercise4.1/merger.h)
+
 add_executable(adv_cpp_hs16 ${SOURCE_FILES})

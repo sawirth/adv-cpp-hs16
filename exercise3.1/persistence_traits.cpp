@@ -1,6 +1,9 @@
 //
 // Created by Sandro on 19.10.2016.
 //
+#ifndef PERSISTENCE_TRAITS_CPP
+#define PERSISTENCE_TRAITS_CPP
+
 #include <fstream>
 #include <sstream>
 
@@ -32,3 +35,5 @@ struct persistence_traits<string>
         ofstream << element << endl;
     }
 };
+
+#endif

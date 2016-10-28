@@ -11,7 +11,7 @@ class spellChecker
 {
 	private:
 		string dictionary_filename;
-		pset<string> dictionarySet;
+		pset<string, persistence_traits<string>> dictionarySet;
 
 	public:
 		static void run();

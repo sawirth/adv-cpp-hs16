@@ -1,6 +1,7 @@
 #ifndef PSET_CPP
 #define PSET_CPP
 
+#include "../exercise3.1/persistence_traits.cpp"
 #include <set>
 #include <string>
 #include <fstream>
@@ -8,7 +9,7 @@
 
 using namespace std;
 
-template<typename T>
+template<typename T, typename P>
 class pset
 {
     private:
@@ -16,6 +17,9 @@ class pset
         string filename;
 
     public:
+    typedef P persister;
+    typedef typename set<T>::iterator iterator;
+
         pset(const string &filename) : filename(filename)
         {
             readSet();
@@ -43,7 +47,7 @@ class pset
 
             while(getline(ifs, line, '\n'))
             {
-                istringstream iss(line);
+                persister::read(ifs, line);
                 s.insert(line);
             }
         }
@@ -51,12 +55,12 @@ class pset
         void writeSet()
         {
             ofstream ofs(filename);
-            typename set<T>::iterator first = s.begin();
-            typename set<T>::iterator last = s.end();
+            iterator first = s.begin();
+            iterator last = s.end();
 
             while (first != last)
             {
-                ofs << *first++ << endl;
+                persister::write(ofs, *first++);
             }
         }
 
