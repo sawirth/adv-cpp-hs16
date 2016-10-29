@@ -2,7 +2,6 @@
 #include "playfield.h"
 #include "../utils/inputUtils.h"
 #include <iostream>
-#include <queue>
 #include "humanPlayer.cpp"
 #include "computerPlayer.cpp"
 
@@ -16,14 +15,17 @@ void connect4game::startGame()
 	cout << "1 - Human vs. Human" << endl;
 	cout << "2 - Human vs. Computer" << endl;
 	cout << "3 - Computer vs. Computer" << endl;
-	cout << "Which mode do you want to play? ";
-	int mode = utils::inputUtils::getInt();
 
-	if (mode < 1 || mode > 3)
+	int mode = 0;
+	do
 	{
-		cout << "Wrong number!" << endl;
-		startGame();
-	}
+		cout << "Which mode do you want to play? ";
+		mode = utils::inputUtils::getInt();
+		if (mode < 1 || mode > 3)
+		{
+			cout << "Wrong number!" << endl;
+		}
+	} while (mode < 1 || mode > 3);
 
 	switch(mode)
 	{
@@ -81,7 +83,7 @@ void connect4game::startGame(player<playfield> &player1, player<playfield> &play
 
 			if (column < 0 || column > 6)
 			{
-				cout << "Column " << column << " is not a possible choice!" << endl;
+				cout << "Column " << column + 1 << " is not a possible choice!" << endl;
 				continue;
 			}
 

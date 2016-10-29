@@ -32,8 +32,6 @@ void runExercise9();
 void runExercise10();
 void runExercise11();
 void runExercise12();
-void runExercise13();
-
 
 
 void selectExercise()
@@ -50,9 +48,8 @@ void selectExercise()
     cout << "8 - pvector_traits with persistence_traits (3.1)" << endl;
     cout << "9 - pset (3.1)" << endl;
     cout << "10 - Spell Checker (3.2)" << endl;
-    cout << "11 - Connect 4 against Human (3.4)" << endl;
-    cout << "12 - Connect 4 against Computer (3.5)" << endl;
-    cout << "13 - Merging STL Containers" << endl;
+    cout << "11 - Connect 4 (all modes)" << endl;
+    cout << "12 - Merging STL Containers" << endl;
 
 
     int exerciseNumber = 0;
@@ -117,10 +114,6 @@ void selectExercise()
 
         case 12:
             runExercise12();
-            break;
-
-        case 13:
-            runExercise13();
             break;
 
         default:
@@ -239,11 +232,6 @@ void runExercise11()
 }
 
 void runExercise12()
-{
-    // to be done
-}
-
-void runExercise13()
 {
     merger<vector<fraction>,list<fraction>,fraction> merger1;
     vector<fraction> v1;

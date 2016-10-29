@@ -14,12 +14,6 @@ class playfield
 	private:
 		char winner;
 		char currentPlayerChar = player1;
-		void checkVertical();
-		void checkHorizontal();
-		void checkLeftToBottomRight();
-		void checkTopToBottomRight();
-		void checkTopToBottomLeft();
-		void checkRightToBottomLeft();
 
 	public:
 		char rep[playfield::width][playfield::height];

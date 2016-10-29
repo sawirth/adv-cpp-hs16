@@ -1,3 +1,4 @@
+#include <limits>
 #include "pvector_traits.cpp"
 #include "persistence_traits.cpp"
 

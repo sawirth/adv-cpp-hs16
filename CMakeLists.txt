@@ -46,6 +46,7 @@ set(SOURCE_FILES
 		3.4_connect4/humanPlayer.cpp
 		3.4_connect4/computerPlayer.cpp
         exercise6/templateRPNRunner.h
-		exercise4.1/merger.h)
+		exercise4.1/merger.h
+		3.4_connect4/connect4Utils.cpp)
 
 add_executable(adv_cpp_hs16 ${SOURCE_FILES})
