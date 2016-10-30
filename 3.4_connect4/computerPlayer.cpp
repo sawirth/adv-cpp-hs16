@@ -5,8 +5,8 @@
 #include <chrono>
 #include <thread>
 #include <iostream>
-#include <vector>
 #include <random>
+#include <algorithm>
 #include "connect4Utils.cpp"
 
 using namespace std;
@@ -79,6 +79,7 @@ class computerPlayer : public player<F>
 		int findBestColumn(const F &field)
 		{
 			vector<int> possibleColumns = vector<int>();
+
 			for (unsigned int i = 0; i < openColumns.size(); i++)
 			{
 				//Play a temporary move in this column
@@ -109,7 +110,7 @@ class computerPlayer : public player<F>
 				}
 
 				//If the opponent cannot win after our move we can add the column to the possible choices
-				if (!opponentCanWin)
+				if (!opponentCanWin && find(possibleColumns.begin(), possibleColumns.end(), column) == possibleColumns.end())
 				{
 					possibleColumns.push_back(column);
 				}
@@ -118,25 +119,28 @@ class computerPlayer : public player<F>
 				undoMove(column);
 			}
 
+			random_shuffle(possibleColumns.begin(), possibleColumns.end());
+
 			if (possibleColumns.empty())
 			{
 				//If we have no opportunity left we lost and just play the first open column
 				return openColumns.at(0);
 			}
+			else if (possibleColumns.size() > 4)
+			{
+				//If we more than 4 possibilities we prefer not an edge column
+				for (auto column : possibleColumns)
+				{
+					if (column > 0 && column < 6)
+					{
+						return column;
+					}
+				}
+			}
 			else
 			{
-				//If we have multiple options we choose randomly
-				int choice = getRandomNumberInRange(0, possibleColumns.size() - 1);
-				return possibleColumns.at((unsigned int) choice);
+				return possibleColumns.at(0);
 			}
-		}
-
-		int getRandomNumberInRange(int from, int to)
-		{
-			static random_device rd;
-			static mt19937 gen(rd());
-			uniform_int_distribution<> dis(from, to);
-			return dis(rd);
 		}
 
 		void findOpenColumns()
