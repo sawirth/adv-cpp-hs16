@@ -17,6 +17,7 @@
 #include "exercise6/templateRPNRunner.h"
 #include "exercise4.1/merger.h"
 #include <list>
+#include "4.1_find_if/find_if_Benchmark.h"
 
 
 using namespace std;
@@ -32,6 +33,7 @@ void runExercise9();
 void runExercise10();
 void runExercise11();
 void runExercise12();
+void runExercise13();
 
 
 void selectExercise()
@@ -50,6 +52,7 @@ void selectExercise()
     cout << "10 - Spell Checker (3.2)" << endl;
     cout << "11 - Connect 4 (all modes)" << endl;
     cout << "12 - Merging STL Containers" << endl;
+    cout << "13 - find_if benchmark" << endl;
 
 
     int exerciseNumber = 0;
@@ -114,6 +117,10 @@ void selectExercise()
 
         case 12:
             runExercise12();
+            break;
+
+        case 13:
+            runExercise13();
             break;
 
         default:
@@ -245,4 +252,10 @@ void runExercise12()
     vector<fraction> v3;
     merger1.merge(v1, v2, v3);
     cout << v3[0] << endl << v3[1] << endl << v3[2] << endl << v3[3] << endl << v3[4] << endl << v3[5] << endl;
+}
+
+void runExercise13()
+{
+    find_if_Benchmark benchmark = find_if_Benchmark();
+    benchmark.run();
 }
