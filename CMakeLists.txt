@@ -49,6 +49,6 @@ set(SOURCE_FILES
 		exercise4.1/merger.h
 		3.4_connect4/connect4Utils.cpp
 		4.1_find_if/find_if_Benchmark.cpp
-		4.1_find_if/find_if_Benchmark.h)
+		4.1_find_if/find_if_Benchmark.h 5.2_under_the_hood/normal.cpp)
 
 add_executable(adv_cpp_hs16 ${SOURCE_FILES})
