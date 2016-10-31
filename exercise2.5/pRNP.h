@@ -17,11 +17,10 @@ class pRNP
 {
 private:
     string filename;
-    string type;
-    pvectorRNP <T> numberStack = pvectorRNP <T>(filename, type);
+    pvectorRNP <T> numberStack = pvectorRNP <T>(filename);
 
 public:
-    pRNP(string filename, string type): filename(filename), type(type) {}
+    pRNP(string filename): filename(filename) {}
 
     const vector <T> getNumberStack()
     {
@@ -139,6 +138,12 @@ public:
                 numberStack.push_back(*numb1);
             }
             cout << "Stack doesn't have 2 numbers to divide" << endl;
+            return;
+        }
+        if(*numb2 == 0){
+            cout << "Division by zero is not allowed, try something other." << endl;
+            numberStack.push_back(*numb2);
+            numberStack.push_back(*numb1);
             return;
         }
         cout << *numb1 << " / " << *numb2 << " = " << *numb1 / *numb2 << endl;

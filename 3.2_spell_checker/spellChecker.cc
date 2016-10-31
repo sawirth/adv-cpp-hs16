@@ -32,6 +32,8 @@ void spellChecker::run()
 			cout << "(a)dd - (i)gnore - (r)eplace? ";
 			string answer;
 			cin >> answer;
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
 			if (answer == "a")
 			{
@@ -42,6 +44,8 @@ void spellChecker::run()
 				cout << "Enter the new word: ";
 				string newWord;
 				cin >> newWord;
+				cin.clear();
+				cin.ignore(numeric_limits<streamsize>::max(), '\n');
 				content.erase(it);
 				content.insert(it, newWord);
 				--it;

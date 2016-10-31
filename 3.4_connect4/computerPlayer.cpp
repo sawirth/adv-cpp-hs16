@@ -141,6 +141,7 @@ class computerPlayer : public player<F>
 			{
 				return possibleColumns.at(0);
 			}
+			return 0;
 		}
 
 		void findOpenColumns()

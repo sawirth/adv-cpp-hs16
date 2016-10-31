@@ -8,17 +8,19 @@ using namespace std;
 
 void pRNPRunner::run()
 {
-    // need to change type of stack here
     cout << "Enter path with filename where you want to store your data:" << endl;
     string path = "";
     cin >> path;
-    string type = "fraction";
-    pRNP <fraction> pRNP(path, type);
+
+    // need to change type of stack here
+    pRNP <fraction> pRNP(path);
     cin.clear();
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
-    /*if (typeid(fraction) == typeid(pRNP.getNumberStack())){
-        cout << "awesome" <<endl;
-    }*/
+
+    //typeid didn't work anymore so for every type a vector to compare need to be declared
+    vector <int> intv;
+    vector <fraction> fractionv;
+    vector <double> doublev;
 
     while(true) {
         cout << "What do you want to do?" << endl;
@@ -38,15 +40,17 @@ void pRNPRunner::run()
                 return;
             } else if (sub == "n") {
                 iss >> sub;
-                if(type == "int")
+
+                //getting the type of our Vector
+                if(typeid(pRNP.getNumberStack())== typeid(intv))
                 {
                     pRNP.putOnStack(stoi(sub));
                 }
-                else if(type == "double")
+                else if(typeid(pRNP.getNumberStack()) == typeid(doublev))
                 {
                     pRNP.putOnStack(stod(sub));
                 }
-                else if(type == "fraction")
+                else if(typeid(pRNP.getNumberStack()) == typeid(fractionv))
                 {
                     string delimiter = "/";
                     if (sub.find(delimiter) != string::npos)
@@ -56,7 +60,11 @@ void pRNPRunner::run()
                         try {
                             int counter = stoi(ctr);
                             int denominator = stoi(denom);
-                            pRNP.putOnStack(fraction(counter, denominator));
+                            if (denominator == 0){
+                                cout << "The denominator can't be zero. Try some other input." << endl;
+                            }
+                            else{
+                            pRNP.putOnStack(fraction(counter, denominator));}
                         }
                         catch (invalid_argument e)
                         {
@@ -67,6 +75,9 @@ void pRNPRunner::run()
                     {
                         cout << "No possible Input." << endl << "You need to enter the counter and denominator in the following form: 1/2." << endl;
                     }
+                }
+                else{
+                    cout << "This template-type is not implemented." << endl;
                 }
             } else if (sub == "d")
             {

@@ -128,6 +128,12 @@ public:
             cout << "Stack doesn't have 2 numbers to divide" << endl;
             return;
         }
+        if(*numb2 == 0){
+            cout << "Division by zero is not allowed, try something other." << endl;
+            numberStack.push_back(*numb2);
+            numberStack.push_back(*numb1);
+            return;
+        }
         cout << *numb1 << " / " << *numb2 << " = " << *numb1 / *numb2 << endl;
         numberStack.push_back(*numb1 / *numb2);
     }
@@ -173,37 +179,6 @@ public:
         cout << "The minimum of the whole stack is: " << min1 << "." << endl;
         return min1;
     }
-
-    /*void mymin(){
-        T *a = nullptr;
-        T *b = nullptr;
-        if (!numberStack.empty()) {
-            a = new T;
-            *a = numberStack[numberStack.size() - 1];
-            numberStack.pop_back();}
-        if (!numberStack.empty()) {
-            b = new T;
-            *b = numberStack[numberStack.size() - 1];
-            numberStack.pop_back();
-        }
-        else
-        {
-            if(a != nullptr)
-            {
-                numberStack.push_back(*a);
-            }
-            cout << "Stack doesn't have 2 numbers to get the minimum." << endl;
-        }
-        if(*a < *b)
-        {
-            numberStack.push_back(*a);
-            cout << "The smaller one of " << *a << " and " << *b << " is " << *a << "." << endl;
-        }else
-        {
-            numberStack.push_back(*b);
-            cout << "The smaller one of " << *a << " and " << *b << " is " << *b << "." << endl;
-        }
-    }*/
 
     /*T allPlus ()
     {

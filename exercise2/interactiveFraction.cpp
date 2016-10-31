@@ -40,6 +40,10 @@ void interactiveFraction::run()
 			break;
 
 		case 4:
+			if(f2.getCounter() == 0){
+				cout << "Division by zero is not allowed." << endl;
+				break;
+			}
 			cout << f1 << " / " << f2 << " = " << f1 / f2 << endl;
 			break;
 
@@ -65,7 +69,13 @@ fraction readFractionFromInput()
 			try {
 				int counter = stoi(ctr);
 				int denominator = stoi(denom);
-				return fraction(counter, denominator);
+				if(denominator == 0){
+					cout << "The denominator can't be zero. Try some other input." << endl;
+				}
+				else
+				{
+					return fraction(counter, denominator);
+				}
 			}
 			catch (invalid_argument e)
 			{

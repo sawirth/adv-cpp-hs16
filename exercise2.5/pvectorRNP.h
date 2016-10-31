@@ -14,10 +14,9 @@ class pvectorRNP
 private:
     string filename;
     vector<T> v;
-    string type;
 
 public:
-    pvectorRNP(string filename, string type) : filename(filename), type(type)
+    pvectorRNP(string filename) : filename(filename)
     {
         readVector();
     }
@@ -47,21 +46,26 @@ public:
         ifstream ifs(filename);
         string line;
 
+        //typeid didn't work anymore so for every type a vector to compare need to be declared
+        vector <int> intv;
+        vector <fraction> fractionv;
+        vector <double> doublev;
+
         while(getline(ifs, line, '\n'))
         {
             istringstream iss(line);
             string sub;
-            if(type == "int"){
+            if(typeid(v) == typeid(intv)){
                 while(iss >> sub) {
                     v.push_back(stoi(sub));
                 }
             }
-            else if(type == "double"){
+            else if(typeid(v) == typeid(doublev)){
                 while(iss >> sub){
                     v.push_back(stod(sub));
                 }
             }
-            else if(type == "fraction") {
+            else if(typeid(v) == typeid(fractionv)) {
                 string delimiter = "/";
                 while (iss >> sub) {
                     if (sub.find(delimiter) != string::npos) {

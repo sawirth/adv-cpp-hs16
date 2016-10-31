@@ -92,31 +92,16 @@ void RPN::division()
         cout << "Stack doesn't have 2 numbers to divide" << endl;
         return;
     }
+    if(numb2 == 0){
+        cout << "Division by zero is not allowed, try something other." << endl;
+        numberStack.push_back(numb2);
+        numberStack.push_back(numb1);
+        return;
+    }
     cout << numb1 << " / " << numb2 << " = " << numb1 / numb2 << endl;
     numberStack.push_back(numb1 / numb2);
 }
 
-/*void RPN::putOnStack()
-{
-    while(true)
-    {
-        cout << "Enter the number you want to put on the stack: ";
-        int number;
-        number = utils::inputUtils::getInt();
-
-        if (cin.fail())
-        {
-            cout << "You didn't enter a number, please enter a number:" << endl;
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        }
-        else
-        {
-            numberStack.push_back(number);
-            break;
-        }
-    }
-}*/
 void RPN::putOnStack(int i){
     numberStack.push_back(i);
     cout << "You added the number " << i << " to the stack." << endl;

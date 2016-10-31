@@ -10,6 +10,12 @@ void templateRPNRunner::run()
     // need to change type of stack here
     templateRNP<fraction> stack;
 
+    //typeid didn't work anymore so for every type a vector to compare need to be declared
+    vector <int> intv;
+    vector <fraction> fractionv;
+    vector <double> doublev;
+
+
     while(true) {
         cout << "What do you want to do?" << endl;
         cout << "q - quit the program" << endl;
@@ -29,15 +35,17 @@ void templateRPNRunner::run()
                 return;
             } else if (sub == "n") {
                 iss >> sub;
-                if(typeid(stack.getNumberStack())== typeid(int))
+
+                //getting the type of our Vector
+                if(typeid(stack.getNumberStack())== typeid(intv))
                 {
                     stack.putOnStack(stoi(sub));
                 }
-                else if(typeid(stack.getNumberStack())== typeid(double))
+                else if(typeid(stack.getNumberStack())== typeid(doublev))
                 {
                     stack.putOnStack(stod(sub));
                 }
-                else if(typeid(stack.getNumberStack())== typeid(fraction))
+                else if(typeid(stack.getNumberStack())== typeid(fractionv))
                 {
                     string delimiter = "/";
                     if (sub.find(delimiter) != string::npos)
@@ -47,7 +55,11 @@ void templateRPNRunner::run()
                         try {
                             int counter = stoi(ctr);
                             int denominator = stoi(denom);
-                            stack.putOnStack(fraction(counter, denominator));
+                            if (denominator == 0){
+                                cout << "The denominator can't be zero. Try some other input." << endl;
+                            }
+                            else{
+                            stack.putOnStack(fraction(counter, denominator));}
                         }
                         catch (invalid_argument e)
                         {
@@ -58,6 +70,8 @@ void templateRPNRunner::run()
                     {
                         cout << "No possible Input." << endl << "You need to enter the counter and denominator in the following form: 1/2." << endl;
                     }
+                } else{
+                        cout << "This template-type is not implemented." << endl;
                 }
             } else if (sub == "d") {
                 stack.popFromStack();
