@@ -93,7 +93,7 @@ void selectExercise()
             break;
         case 4:
             runExercise4();
-
+            break;
         case 5:
             runExercise5();
             break;

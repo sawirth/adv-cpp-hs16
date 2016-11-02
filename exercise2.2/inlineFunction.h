@@ -22,7 +22,7 @@ public:
 
 class Rectangle: public Polygon {
 public:
-    int area ()
+    inline int area ()
     {
         return width * height;
     }

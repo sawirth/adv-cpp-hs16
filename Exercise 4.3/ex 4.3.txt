@@ -1,0 +1,27 @@
+char ch;		                                            implementation, declaration of local variable
+
+string s;		                                            implementation, declaration of local variable
+
+extern int error_number;	                                header, declaration -> extern: will be defined elsewhere
+
+static double sq(double);	                                header, function declaration without definition
+
+int count=1;			                                    implementation file, definition
+
+const double pi=3.2; // according to Indiana Pi Bill        header, constant ( could be also in implementation)
+
+struct fraction { int c; int d; };	                        header, structure
+
+char *prog[]={"echo","hello","world!",NULL};	            impl., definition
+
+extern "C" void c_swap(int *a, int *b);		                header -> extern (also without, because function decl.)
+
+double sqrt(double);	                                    header, function declaration
+
+void swap(int &a, int &b) { int c=a; a=b; b=c; } 	        impl., function definitio, not inline
+
+template<typename T> T add(T a, T b) { return a+b; }	    header,template
+
+ namespace { int a; }			                            dunno
+
+struct user;				                                header, structure
