@@ -1,3 +1,4 @@
+#include <limits>
 #include "spellChecker.h"
 #include "../utils/inputUtils.h"
 

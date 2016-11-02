@@ -284,10 +284,13 @@ void runExercise13()
 
 void runExercise14()
 {
-   /* multiplication mult;
-    divide_by_2 div_2;
-    square square1;
-    somefunction_t<multiplication, divide_by_2, square> func(mult, div_2, square1);
+    divide_by_2<int, int> div2;
+    square<int, int> sqr;
+    multiplication<int, int, int> multipl;
 
-    cout << func(8) << std::endl;*/
+    somefunction_t<multiplication<int, int, int>, square<int, int>, divide_by_2<int, int> > func = somefunction_t<multiplication<int, int, int>, square<int, int>, divide_by_2<int, int> >(multipl, sqr, div2);
+
+    //Makes the following calculation: multiplication(divide_by_2(8), square(8))
+    // (8 * 8) * (8 / 2) = 256
+    cout << func(8) << endl;
 }

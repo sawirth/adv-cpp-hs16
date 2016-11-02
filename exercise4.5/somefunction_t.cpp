@@ -18,24 +18,36 @@ public:
     }
 };
 
+template<class Arg1, class Arg2, class Res>
+class multiplication {
+	public:
+		typedef Arg1 first_argument_type;
+		typedef Arg2 second_argument_type;
+		typedef Res result_type;
 
-struct multiplication {
-public:
-    int operator()(int arg0, int arg1) {
-        return arg0 * arg1;
-    }
+		result_type operator()(first_argument_type arg1, second_argument_type arg2) {
+			return arg1 * arg2;
+		}
 };
 
-struct divide_by_2 {
-public:
-    int operator()(int arg) {
-        return arg / 2;
-    }
+template<class Arg, class Res>
+class divide_by_2 {
+	public:
+		typedef Arg argument_type;
+		typedef Res result_type;
+
+		result_type operator()(argument_type arg) {
+			return arg / 2;
+		}
 };
 
-struct square {
-public:
-    int operator()(int arg) {
-        return arg * arg;
-    }
+template<class Arg, class Res>
+class square {
+	public:
+		typedef Arg argument_type;
+		typedef Res result_type;
+
+		result_type operator()(argument_type arg) {
+			return arg * arg;
+		}
 };
