@@ -18,6 +18,8 @@
 #include "exercise4.1/merger.h"
 #include <list>
 #include "4.1_find_if/find_if_Benchmark.h"
+#include "exercise4.5/somefunction_t.cpp"
+#include "exercise2.2/inlineFunction.h"
 
 
 using namespace std;
@@ -25,6 +27,7 @@ using namespace std;
 //Declare exercise functions here and implement them at the end
 void runExercise2();
 void runExercise3();
+void runExercise4();
 void runExercise5();
 void runExercise6();
 void runExercise7();
@@ -34,6 +37,7 @@ void runExercise10();
 void runExercise11();
 void runExercise12();
 void runExercise13();
+void runExercise14();
 
 
 void selectExercise()
@@ -53,6 +57,7 @@ void selectExercise()
     cout << "11 - Connect 4 (all modes)" << endl;
     cout << "12 - Merging STL Containers" << endl;
     cout << "13 - find_if benchmark" << endl;
+    cout << "14 - somefunction_t (4.5)" << endl;
 
 
     int exerciseNumber = 0;
@@ -86,6 +91,8 @@ void selectExercise()
         case 3:
 			runExercise3();
             break;
+        case 4:
+            runExercise4();
 
         case 5:
             runExercise5();
@@ -121,6 +128,10 @@ void selectExercise()
 
         case 13:
             runExercise13();
+            break;
+
+        case 14:
+            runExercise14();
             break;
 
         default:
@@ -195,7 +206,15 @@ void runExercise3()
 	r.run();
 }
 
-void runExercise5(){
+void runExercise4()
+{
+    Polygon *poly = new Rectangle();
+    poly->set_values(1, 2);
+    cout << poly->area() << '\n';
+}
+
+void runExercise5()
+{
     RPNRunner r = RPNRunner();
     cin.clear();
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -251,11 +270,24 @@ void runExercise12()
     v2.push_back(fraction(12,13));
     vector<fraction> v3;
     merger1.merge(v1, v2, v3);
-    cout << v3[0] << endl << v3[1] << endl << v3[2] << endl << v3[3] << endl << v3[4] << endl << v3[5] << endl;
+    cout << "Our new container contains the values:" << endl;
+    for(int i = 0; i < v3.size(); i++){
+        cout << v3[i] << endl;
+    }
 }
 
 void runExercise13()
 {
     find_if_Benchmark benchmark = find_if_Benchmark();
     benchmark.run();
+}
+
+void runExercise14()
+{
+   /* multiplication mult;
+    divide_by_2 div_2;
+    square square1;
+    somefunction_t<multiplication, divide_by_2, square> func(mult, div_2, square1);
+
+    cout << func(8) << std::endl;*/
 }

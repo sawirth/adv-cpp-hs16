@@ -180,15 +180,19 @@ public:
         return min1;
     }
 
-    /*T allPlus ()
+    T allPlus ()
     {
         T sumOfElements = accumulate(numberStack.begin(), numberStack.end(), 0.0);
+        cout << "The sum of all elements is " << sumOfElements << "." << endl;
+        return sumOfElements;
     }
 
     T allMultiplicate ()
     {
         T productOfElements = accumulate(numberStack.begin(), numberStack.end(), 1.0, multiplies<double>());
-    }*/
+        cout << "The product of all elements is " << productOfElements << "." << endl;
+        return productOfElements;
+    }
 };
 
 #endif //ADV_CPP_HS16_TEMPLATERNP_H

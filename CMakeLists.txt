@@ -39,7 +39,6 @@ set(SOURCE_FILES
 		3.4_connect4/connect4game.h
 		tests/connect4tests.cpp
 		3.4_connect4/player.cpp
-        exercise6/templateRPN.cpp
         exercise6/templateRPN.h
         exercise3.1/persistence_traits.cpp
         exercise6/templateRPNRunner.cpp
@@ -49,6 +48,9 @@ set(SOURCE_FILES
 		exercise4.1/merger.h
 		3.4_connect4/connect4Utils.cpp
 		4.1_find_if/find_if_Benchmark.cpp
-		4.1_find_if/find_if_Benchmark.h 5.2_under_the_hood/normal.cpp)
+		4.1_find_if/find_if_Benchmark.h
+        5.2_under_the_hood/normal.cpp
+        exercise4.5/somefunction_t.cpp
+        exercise2.2/inlineFunction.h)
 
 add_executable(adv_cpp_hs16 ${SOURCE_FILES})

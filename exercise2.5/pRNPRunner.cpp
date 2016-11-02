@@ -25,7 +25,7 @@ void pRNPRunner::run()
     while(true) {
         cout << "What do you want to do?" << endl;
         cout << "q - quit the program" << endl;
-        cout << "n - puts a type you chose"<< endl;
+        cout << "n - puts a type you chose on the stack"<< endl;
         cout << "d - removes last number from the stack" << endl;
         cout << "m - gets the minimum from the last two operations" << endl;
         cout << "Or just simply do some operations on the last two numbers from the stack: '+', '-', '*', '/'" << endl;

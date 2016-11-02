@@ -10,11 +10,13 @@ class merger{
 public:
     void merge(T &in1, T2 &in2, T &out){
         type1 tempValue;
+        // push container 1 in our new container
         while(!(in1.empty())){
             tempValue = in1.back();
             in1.pop_back();
             out.push_back(tempValue);
         }
+        // push container 2 in our new container
         while(!(in2.empty())){
             tempValue = in2.back();
             in2.pop_back();

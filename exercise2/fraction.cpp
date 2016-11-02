@@ -96,7 +96,7 @@ bool fraction::operator<(fraction otherFraction){
     }
 }
 
-fraction fraction::operator*(double otherDouble)
+/*fraction fraction::operator*(double otherDouble)
 {
     fraction f = fraction((int)(getCounter() * otherDouble), getDenominator());
     f.shorten();
@@ -109,6 +109,7 @@ fraction fraction::operator+(double otherDouble)
     f.shorten();
     return f;
 }
+*/
 
 
 

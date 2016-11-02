@@ -31,9 +31,9 @@ T lcm(T a, T b)
 	return (a / gcf(a, b)) * b;
 }
 
-int main(int argc, char const *argv[]) {
+/*int main(int argc, char const *argv[]) {
 	int a = 5;
 	int b = 5;
 	swap(a, b);
 	return 0;
-}
+}*/

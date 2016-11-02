@@ -19,10 +19,12 @@ void templateRPNRunner::run()
     while(true) {
         cout << "What do you want to do?" << endl;
         cout << "q - quit the program" << endl;
-        cout << "n - puts a type you chose"<< endl;
+        cout << "n - puts a type you chose on the stack"<< endl;
         cout << "d - removes last number from the stack" << endl;
         cout << "m - gets the minimum from the last two operations" << endl;
         cout << "m2 - gets the minimum from the whole stack (3.3)" << endl;
+        cout << "all+ - gets the sum of the whole stack, doesn't really work with fractions (they always get rounded)" << endl;
+        cout << "all* - gets the product of the whole stack, doesn't really work with fractions (they always get rounded)" << endl;
         cout << "Or just simply do some operations on the last two numbers from the stack: '+', '-', '*', '/'" << endl;
         cout << "Whitespace is essential between the different operations." << endl;
         string typedLine;
@@ -87,10 +89,10 @@ void templateRPNRunner::run()
                 stack.myMin();
             } else if (sub == "m2") {
                 stack.myMin2();
-            /*} else if (sub == "all+"){
+            } else if (sub == "all+"){
                 stack.allPlus();
             } else if (sub == "all*"){
-                    stack.allMultiplicate();*/
+                    stack.allMultiplicate();
             } else {
                     cout << "No possible input, try again." << endl << "Be careful with whitespaces!" << endl;
             }
