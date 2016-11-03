@@ -18,6 +18,11 @@ class templateRNP
 private:
     vector <T> numberStack;
 public:
+    void printStack()
+    {
+
+    }
+
     const vector<T> &getNumberStack() const
     {
         return numberStack;

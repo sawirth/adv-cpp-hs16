@@ -21,6 +21,7 @@ void templateRPNRunner::run()
         cout << "q - quit the program" << endl;
         cout << "n - puts a type you chose on the stack"<< endl;
         cout << "d - removes last number from the stack" << endl;
+        cout << "p - Print stack" << endl,
         cout << "m - gets the minimum from the last two operations" << endl;
         cout << "m2 - gets the minimum from the whole stack (3.3)" << endl;
         cout << "all+ - gets the sum of the whole stack, doesn't really work with fractions (they always get rounded)" << endl;
@@ -35,6 +36,9 @@ void templateRPNRunner::run()
             if (sub == "q")          //better with switch
             {
                 return;
+            }
+            else if (sub == "p") {
+                stack.printStack();
             } else if (sub == "n") {
                 iss >> sub;
 
