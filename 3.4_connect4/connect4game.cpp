@@ -46,7 +46,11 @@ void connect4game::startGame()
 			break;
 
 		case 3:
-			cout << "Mode not yet implemented.." << endl;
+			{
+				computerPlayer<playfield> p1 = computerPlayer<playfield>();
+				computerPlayer<playfield> p2 = computerPlayer<playfield>();
+				startGame(p1, p2);
+			}
 			break;
 
 		default:

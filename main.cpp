@@ -259,6 +259,8 @@ void runExercise11()
 
 void runExercise12()
 {
+    // for output type we always take a vector
+    // to add other types we need to differ between the different types and handle them differently
     merger<vector<fraction>,list<fraction>,fraction> merger1;
     vector<fraction> v1;
     v1.push_back(fraction(3,4));

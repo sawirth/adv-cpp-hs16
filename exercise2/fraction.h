@@ -37,10 +37,11 @@ public:
 
     //for exercise 6
     bool operator<(fraction otherFraction);
+
     operator double(){return (double)counter/denominator;}
 
-    fraction operator+(double otherDouble);
-    fraction operator*(double otherDouble);
+    //fraction operator+(double otherDouble);
+    //fraction operator*(double otherDouble);
 };
 
 
