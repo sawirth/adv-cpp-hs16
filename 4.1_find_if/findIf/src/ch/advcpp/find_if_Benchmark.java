@@ -9,7 +9,7 @@ public class find_if_Benchmark<E>
 {
     private List<Integer> numberOfIterations = new ArrayList<>();
     private List<Long> numberOfElapsedTimes = new ArrayList<>();
-    private static final int NUMBER_OF_RUNS = 10000;
+    private static final int NUMBER_OF_RUNS = 1000;
     private static final int RANGE = 1000000;
 
     private Iterator<E> find_if(Iterator<E> iter, Matcher<E> matcher)
