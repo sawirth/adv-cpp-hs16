@@ -20,6 +20,7 @@
 #include "4.1_find_if/find_if_Benchmark.h"
 #include "exercise4.5/somefunction_t.cpp"
 #include "exercise2.2/inlineFunction.h"
+#include "5.1_Emulating_pointers/emulatingPointersRunner.h"
 
 
 using namespace std;
@@ -38,6 +39,7 @@ void runExercise11();
 void runExercise12();
 void runExercise13();
 void runExercise14();
+void runExercise15();
 
 
 void selectExercise()
@@ -58,6 +60,7 @@ void selectExercise()
     cout << "12 - Merging STL Containers" << endl;
     cout << "13 - find_if benchmark" << endl;
     cout << "14 - somefunction_t (4.5)" << endl;
+    cout << "15 - Emulating Pointers (5.1)" << endl;
 
 
     int exerciseNumber = 0;
@@ -132,6 +135,10 @@ void selectExercise()
 
         case 14:
             runExercise14();
+            break;
+
+        case 15:
+            runExercise15();
             break;
 
         default:
@@ -295,4 +302,10 @@ void runExercise14()
     //Makes the following calculation: multiplication(divide_by_2(8), square(8))
     // (8 * 8) * (8 / 2) = 256
     cout << func(8) << endl;
+}
+
+void runExercise15()
+{
+    emulatingPointersRunner r = emulatingPointersRunner();
+    r.run();
 }

@@ -5,6 +5,11 @@
 
 using namespace std;
 
+void RPN::printStack() {
+    for(int i= 0; i<numberStack.size(); i ++){
+        cout << numberStack[i] << endl;
+    }
+}
 void RPN::addition()
 {
     int numb1 = 0;

@@ -3,6 +3,9 @@
 
 #include <ostream>
 #include <istream>
+#include "complex.h"
+#include "complex"
+
 
 class fraction
 {
@@ -39,6 +42,7 @@ public:
     bool operator<(fraction otherFraction);
 
     operator double(){return (double)counter/denominator;}
+    //operator complex(){return (complex) counter/denominator;}
 
     //fraction operator+(double otherDouble);
     //fraction operator*(double otherDouble);

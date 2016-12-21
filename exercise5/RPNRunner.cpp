@@ -14,6 +14,8 @@ void RPNRunner::run()
         cout << "d - removes last number from the stack" << endl;
         cout << "Or just simply do some operations on the last two numbers from the stack: '+', '-', '*', '/'" << endl;
         cout << "Whitespace is essential between the different operations." << endl;
+        cout << "Stack:" << endl;
+        stack.printStack();
         string typedLine;
         getline(cin, typedLine);
         istringstream iss(typedLine);

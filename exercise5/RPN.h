@@ -19,6 +19,7 @@ public:
     void division();
     void putOnStack(int i);
     void popFromStack();
+    void printStack();
     const vector<int> &getVector() const
     {
         return numberStack;

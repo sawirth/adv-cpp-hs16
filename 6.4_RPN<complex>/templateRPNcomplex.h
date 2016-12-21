@@ -1,5 +1,5 @@
-#ifndef ADV_CPP_HS16_PRNP_H
-#define ADV_CPP_HS16_PRNP_H
+#ifndef ADV_CPP_HS16_TEMPLATERPNcomplex_H
+#define ADV_CPP_HS16_TEMPLATERPNcomplex_H
 
 #include <vector>
 #include <iostream>
@@ -7,44 +7,32 @@
 #include <sstream>
 #include "../exercise2/fraction.h"
 #include <numeric>
-#include "../exercise2.5/pvectorRNP.h"
+#include <algorithm>
 
 
 using namespace std;
 
 template<typename T>
-class pRNP
+class templateRPNcomplex
 {
 private:
-    string filename;
-    pvectorRNP <T> numberStack = pvectorRNP <T>(filename);
-
+    vector <T> numberStack;
 public:
-    pRNP(string filename): filename(filename) {}
-
     void printStack() {
-        for (int i = 0; i < getSize(); i++) {
-            cout << numberStack.getVector()[i] << endl;
+        for(int i= 0; i<numberStack.size(); i ++){
+            cout << numberStack[i] << endl;
         }
     }
 
-    const vector <T> getNumberStack()
-    {
-        return numberStack.getVector();
-    }
-    pvectorRNP <T> getRNP()
+    const vector<T> &getNumberStack() const
     {
         return numberStack;
     }
 
-    int getSize()
-    {
-        return getNumberStack().size();
-    }
     void popFromStack()
     {
-        if (!getNumberStack().empty()) {
-            T numb = getNumberStack()[getSize() - 1];
+        if (!numberStack.empty()) {
+            T numb = numberStack[numberStack.size() - 1];
             cout << "Removed message: " << numb << endl;
             numberStack.pop_back();
         } else {
@@ -55,14 +43,14 @@ public:
     {
         T *numb1 = nullptr;
         T *numb2 = nullptr;
-        if (!getNumberStack().empty()) {
+        if (!numberStack.empty()) {
             numb1 = new T;
-            *numb1 = getNumberStack()[getSize() - 1];
+            *numb1 = numberStack[numberStack.size() - 1];
             numberStack.pop_back();
         }
-        if (!getNumberStack().empty()) {
+        if (!numberStack.empty()) {
             numb2 = new T;
-            *numb2 = getNumberStack()[getSize() - 1];
+            *numb2 = numberStack[numberStack.size() - 1];
             numberStack.pop_back();
         } else {
             if(numb1 != nullptr)
@@ -80,14 +68,14 @@ public:
     {
         T *numb1 = nullptr;
         T *numb2 = nullptr;
-        if (!getNumberStack().empty()) {
+        if (!numberStack.empty()) {
             numb1 = new T;
-            *numb1 = getNumberStack()[getSize() - 1];
+            *numb1 = numberStack[numberStack.size() - 1];
             numberStack.pop_back();
         }
-        if (!getNumberStack().empty()) {
+        if (!numberStack.empty()) {
             numb2 = new T;
-            *numb2 = getNumberStack()[getSize() - 1];
+            *numb2 = numberStack[numberStack.size() - 1];
             numberStack.pop_back();
         } else {
             if(numb1 != nullptr)
@@ -104,14 +92,14 @@ public:
     {
         T *numb1 = nullptr;
         T *numb2 = nullptr;
-        if (!getNumberStack().empty()) {
+        if (!numberStack.empty()) {
             numb1 = new T;
-            *numb1 = getNumberStack()[getSize() - 1];
+            *numb1 = numberStack[numberStack.size() - 1];
             numberStack.pop_back();
         }
-        if (!getNumberStack().empty()) {
+        if (!numberStack.empty()) {
             numb2 = new T;
-            *numb2 = getNumberStack()[getSize() - 1];
+            *numb2 = numberStack[numberStack.size() - 1];
             numberStack.pop_back();
         } else {
             if(numb1 != nullptr)
@@ -129,14 +117,14 @@ public:
     {
         T *numb1 = nullptr;
         T *numb2 = nullptr;
-        if (!getNumberStack().empty()) {
+        if (!numberStack.empty()) {
             numb1 = new T;
-            *numb1 = getNumberStack()[getSize() - 1];
+            *numb1 = numberStack[numberStack.size() - 1];
             numberStack.pop_back();
         }
-        if (!getNumberStack().empty()) {
+        if (!numberStack.empty()) {
             numb2 = new T;
-            *numb2 = getNumberStack()[getSize() - 1];
+            *numb2 = numberStack[numberStack.size() - 1];
             numberStack.pop_back();
         } else {
             if(numb1 != 0)
@@ -161,48 +149,56 @@ public:
         cout << "You added the number " << i << " to the stack." << endl;
     }
 
-    T myMin() {
+    T myMin(){
         T *a = nullptr;
         T *b = nullptr;
-        if (getSize() > 1) {
+        if (numberStack.size()>1) {
             a = new T;
-            *a = getNumberStack()[getSize() - 1];
+            *a = numberStack[numberStack.size() - 1];
             b = new T;
-            *b = getNumberStack()[getSize() - 2];
-        } else {
+            *b = numberStack[numberStack.size() - 2];
+        }
+        else
+        {
             cout << "Stack doesn't have 2 numbers to get the minimum." << endl;
             return 0;
         }
-        if (*a < *b) {
+        if(*a < *b)
+        {
             cout << "The smaller one of " << *a << " and " << *b << " is " << *a << "." << endl;
             return *a;
-        } else {
+        }else
+        {
             cout << "The smaller one of " << *a << " and " << *b << " is " << *b << "." << endl;
             return *b;
         }
     }
 
-   /* T myMin2() {
-        if(getNumberStack().empty()){
+    T myMin2() {
+        if(numberStack.empty()){
             cout << "No numbers in the stack." << endl;
             return 0;
         }
-        T min1 = getNumberStack().back();
-        for_each(getNumberStack().begin(), getNumberStack().end(), [&](T &cur){
+        T min1 = numberStack.back();
+        for_each(numberStack.begin(), numberStack.end(), [&](T &cur){
             if(cur < min1){min1 = cur;}});
         cout << "The minimum of the whole stack is: " << min1 << "." << endl;
         return min1;
-    }*/
+    }
 
-    /*T allPlus ()
+    T allPlus ()
     {
         T sumOfElements = accumulate(numberStack.begin(), numberStack.end(), 0.0);
+        cout << "The sum of all elements is " << sumOfElements << "." << endl;
+        return sumOfElements;
     }
 
     T allMultiplicate ()
     {
         T productOfElements = accumulate(numberStack.begin(), numberStack.end(), 1.0, multiplies<double>());
-    }*/
+        cout << "The product of all elements is " << productOfElements << "." << endl;
+        return productOfElements;
+    }
 };
 
-#endif //ADV_CPP_HS16_PRNP_H
+#endif //ADV_CPP_HS16_TEMPLATERPNcomplex_H

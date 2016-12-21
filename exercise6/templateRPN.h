@@ -18,9 +18,10 @@ class templateRNP
 private:
     vector <T> numberStack;
 public:
-    void printStack()
-    {
-
+    void printStack() {
+        for(int i= 0; i<numberStack.size(); i ++){
+            cout << numberStack[i] << endl;
+        }
     }
 
     const vector<T> &getNumberStack() const
