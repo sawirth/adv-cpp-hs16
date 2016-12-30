@@ -8,22 +8,22 @@
 #include <random>
 #include <algorithm>
 #include "connect4Utils.cpp"
+#include "PlayerFactory.cpp"
 
 using namespace std;
 
-template<typename F>
-class computerPlayer : public player<F>
+class computerPlayer : public player
 {
 	private:
 		char myColor = ' ';
 		char opponentColor = ' ';
-		char none = F::none;
-		char localField[F::width][F::height];
-		const int width = F::width;
-		const int height = F::height;
+		char none = playfield::none;
+		char localField[playfield::width][playfield::height];
+		const int width = playfield::width;
+		const int height = playfield::height;
 		vector<int> openColumns = vector<int>();
 
-		void setStoneColor(const F &field)
+		void setStoneColor(const playfield &field)
 		{
 			//Since this method is called in the first round, its enough if we check the bottom row
 			for (int column = 0; column < field.width; column++)
@@ -43,7 +43,7 @@ class computerPlayer : public player<F>
 		}
 
 	public:
-		virtual int play(const F &field) override
+		virtual int play(const playfield &field) override
 		{
 			//At the beginning the computer has to found out which color he is
 			if (myColor == ' ')
@@ -64,8 +64,13 @@ class computerPlayer : public player<F>
 			return column;
 		}
 
+		static player *make()
+		{
+			return new computerPlayer();
+		}
+
 	private:
-		void copyFieldToLocal(const F &field)
+		void copyFieldToLocal(const playfield &field)
 		{
 			for (int column = 0; column < field.width; column++)
 			{
@@ -76,7 +81,7 @@ class computerPlayer : public player<F>
 			}
 		}
 
-		int findBestColumn(const F &field)
+		int findBestColumn(const playfield &field)
 		{
 			vector<int> possibleColumns = vector<int>();
 
@@ -182,9 +187,10 @@ class computerPlayer : public player<F>
 
 		char hasWinner()
 		{
-			return connect4Utils<F>::checkForWin(localField);
+			return connect4Utils<playfield>::checkForWin(localField);
 		}
 };
 
+static PlayerFH<computerPlayer> registerComputerPlayer;
 
 #endif //ADV_CPP_HS16_COMPUTERPLAYER_H

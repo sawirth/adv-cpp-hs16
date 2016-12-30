@@ -1,5 +1,4 @@
 #include "connect4game.h"
-#include "playfield.h"
 #include "../utils/inputUtils.h"
 #include <iostream>
 #include "humanPlayer.cpp"
@@ -31,24 +30,24 @@ void connect4game::startGame()
 	{
 		case 1:
 			{
-				humanPlayer<playfield> p1 = humanPlayer<playfield>();
-				humanPlayer<playfield> p2 = humanPlayer<playfield>();
+				humanPlayer p1 = humanPlayer();
+				humanPlayer p2 = humanPlayer();
 				startGame(p1, p2);
 			}
 			break;
 
 		case 2:
 			{
-				humanPlayer<playfield> p1 = humanPlayer<playfield>();
-				computerPlayer<playfield> p2 = computerPlayer<playfield>();
+				humanPlayer p1 = humanPlayer();
+				computerPlayer p2 = computerPlayer();
 				startGame(p1, p2);
 			}
 			break;
 
 		case 3:
 			{
-				computerPlayer<playfield> p1 = computerPlayer<playfield>();
-				computerPlayer<playfield> p2 = computerPlayer<playfield>();
+				computerPlayer p1 = computerPlayer();
+				computerPlayer p2 = computerPlayer();
 				startGame(p1, p2);
 			}
 			break;
@@ -61,7 +60,7 @@ void connect4game::startGame()
 	cout << "Thanks for playing :)" << endl;
 }
 
-void connect4game::startGame(player<playfield> &player1, player<playfield> &player2)
+void connect4game::startGame(player &player1, player &player2)
 {
 	playfield field = playfield();
 	field.initField();

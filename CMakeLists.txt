@@ -64,6 +64,7 @@ set(SOURCE_FILES
 		7.2_Stack_and_Inheritance/Stack.cpp
         exercise2.2/inlineFunction.h
 		7.2_inheritance_stack/Stack.cpp
-		7.2_inheritance_stack/UnlimitedStack.cpp)
+		7.2_inheritance_stack/UnlimitedStack.cpp
+		3.4_connect4/PlayerFactory.cpp)
 
 add_executable(adv_cpp_hs16 ${SOURCE_FILES})
