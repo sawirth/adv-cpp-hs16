@@ -21,7 +21,8 @@
 #include "exercise4.5/somefunction_t.cpp"
 #include "exercise2.2/inlineFunction.h"
 #include "5.1_Emulating_pointers/emulatingPointersRunner.h"
-
+#include "7.2_inheritance_stack/Stack.cpp"
+#include "7.2_inheritance_stack/UnlimitedStack.cpp"
 
 using namespace std;
 
@@ -40,7 +41,7 @@ void runExercise12();
 void runExercise13();
 void runExercise14();
 void runExercise15();
-
+void runExercise16();
 
 void selectExercise()
 {
@@ -61,7 +62,7 @@ void selectExercise()
     cout << "13 - find_if benchmark" << endl;
     cout << "14 - somefunction_t (4.5)" << endl;
     cout << "15 - Emulating Pointers (5.1)" << endl;
-
+    cout << "16 - Inheritance Stack (7.2)" << endl;
 
     int exerciseNumber = 0;
     cout << "Please enter the number of the exercise that you want to run: ";
@@ -139,6 +140,10 @@ void selectExercise()
 
         case 15:
             runExercise15();
+			break;
+
+        case 16:
+            runExercise16();
             break;
 
         default:
@@ -308,4 +313,42 @@ void runExercise15()
 {
     emulatingPointersRunner r = emulatingPointersRunner();
     r.run();
+}
+
+void stackSlicing(Stack stack)
+{
+    cout << "Slicing by value" << endl;
+
+    //Das ruft die print-Methode in der Basisklasse auf und wird somit nur die ersten 256 Elemente ausgeben
+    stack.print();
+}
+
+void stackSlicing2(Stack &stack)
+{
+    cout << "Slicing by reference" << endl;
+
+    //Das ruft die print-Methode in der Subklasse auf und wird gibt somit alle Elemente aus
+    stack.print();
+}
+
+void runExercise16()
+{
+    UnlimitedStack us = UnlimitedStack();
+
+    for (int i = 0; i < 256; i++)
+    {
+        us.push(i);
+    }
+
+    us.print();
+
+    //Add another 256 elements
+    for (int i = 256; i < 512; i++)
+    {
+        us.push(i);
+    }
+
+    us.print();
+    stackSlicing(us);
+    stackSlicing2(us);
 }

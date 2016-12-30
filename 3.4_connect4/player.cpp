@@ -6,6 +6,7 @@ class player
 {
 	public:
 		virtual int play(const F &field) = 0;
+		virtual ~player() {}
 };
 
 #endif //ADV_CPP_HS16_PLAYER_H
