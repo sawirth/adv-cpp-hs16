@@ -51,6 +51,6 @@ set(SOURCE_FILES
 		4.1_find_if/find_if_Benchmark.h
         5.2_under_the_hood/normal.cpp
         exercise4.5/somefunction_t.cpp
-        exercise2.2/inlineFunction.h 5.1_Emulating_pointers/dumb_pointer.cpp 5.1_Emulating_pointers/smart_pointer.cpp 6.4_RPN<complex>/templateRPNcomplex.h 6.4_RPN<complex>/templateRPNcomplexRunner.cpp 6.4_RPN<complex>/templateRPNcomplexRunner.h 5.1_Emulating_pointers/reference_counting.cpp 5.1_Emulating_pointers/emulatingPointersRunner.cpp 5.1_Emulating_pointers/emulatingPointersRunner.h 5.1_Emulating_pointers/tester.cpp 7.2_Stack_and_Inheritance/Stack.cpp)
+        exercise2.2/inlineFunction.h 5.1_Emulating_pointers/dumb_pointer.cpp 5.1_Emulating_pointers/smart_pointer.cpp 6.4_RPN_complex/templateRPNcomplex.h 6.4_RPN_complex/templateRPNcomplexRunner.cpp 6.4_RPN_complex/templateRPNcomplexRunner.h 5.1_Emulating_pointers/reference_counting.cpp 5.1_Emulating_pointers/emulatingPointersRunner.cpp 5.1_Emulating_pointers/emulatingPointersRunner.h 5.1_Emulating_pointers/tester.cpp 7.2_Stack_and_Inheritance/Stack.cpp)
 
 add_executable(adv_cpp_hs16 ${SOURCE_FILES})
