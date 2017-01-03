@@ -24,6 +24,6 @@ class humanPlayer: public player
 		}
 };
 
-static PlayerFH<humanPlayer> registerHumanPlayer;
+//static PlayerFH<humanPlayer> registerHumanPlayer;
 
 #endif //ADV_CPP_HS16_HUMANPLAYER_H

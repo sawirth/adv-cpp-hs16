@@ -59,7 +59,7 @@ void playfield::printField()
 		cout << "\t";
 		for (int column = 0; column < playfield::width; column++)
 		{
-			char player = playfield::rep[column][row];
+			int player = playfield::rep[column][row];
 			cout << player;
 
 			if (column < playfield::width - 1)
@@ -87,14 +87,14 @@ bool playfield::isColumnFull(int column)
 	return true;
 }
 
-char playfield::getWinner() const
+int playfield::getWinner() const
 {
 	return winner;
 }
 
 void playfield::checkForWinner()
 {
-	winner = connect4Utils<playfield>::checkForWin(rep);
+	winner = connect4Utils::checkForWin(rep);
 	if (winner != none)
 	{
 		playfield::isRunning = false;
@@ -127,7 +127,7 @@ bool playfield::isTie()
 	return true;
 }
 
-char playfield::getCurrentPlayerChar() const
+int playfield::getCurrentPlayerChar() const
 {
 	return currentPlayerChar;
 }

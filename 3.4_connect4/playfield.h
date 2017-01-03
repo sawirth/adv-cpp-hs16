@@ -6,20 +6,20 @@ class playfield
 	public:
 		const static int width = 7;
 		const static int height = 6;
-		const static char none = ' ';
-		const static char player1 = 'O';
-		const static char player2 = 'X';
+		const static int none = 0;
+		const static int player1 = 1;
+		const static int player2 = 2;
 		bool isRunning;
 
 	private:
-		char winner;
-		char currentPlayerChar = player1;
+		int winner;
+		int currentPlayerChar = player1;
 
 	public:
-		char rep[playfield::width][playfield::height];
+		int rep[playfield::width][playfield::height];
 
 	public:
-		char stoneat(int x, int y) const
+		int stoneat(int x, int y) const
 		{
 			return rep[x][y];
 		}
@@ -33,7 +33,7 @@ class playfield
 		//Checks if a certain column is full. Only in non-full columns can stones be placed
 		bool isColumnFull(int column);
 
-		char getWinner() const;
+		int getWinner() const;
 
 		void checkForWinner();
 
@@ -41,7 +41,7 @@ class playfield
 
 		bool isTie();
 
-		char getCurrentPlayerChar() const;
+		int getCurrentPlayerChar() const;
 };
 
 #endif //ADV_CPP_HS16_PLAYFIELD_H

@@ -1,20 +1,21 @@
 #ifndef ADV_CPP_HS16_CONNECT4UTILS_H
 #define ADV_CPP_HS16_CONNECT4UTILS_H
 
-template<typename F>
+#include "playfield.h"
+
 class connect4Utils
 {
 	public:
-		static char checkForWin(char field[F::width][F::height])
+		static int checkForWin(int field[playfield::width][playfield::height])
 		{
-			char winner = F::none;
+			int winner = playfield::none;
 			winner = checkForHorizontalWin(field);
-			if (winner == F::none)
+			if (winner == playfield::none)
 			{
 				winner = checkForVerticalWin(field);
 			}
 
-			if (winner == F::none)
+			if (winner == playfield::none)
 			{
 				winner = checkForDiagonalWin(field);
 			}
@@ -23,17 +24,17 @@ class connect4Utils
 		}
 
 	private:
-		static char checkForHorizontalWin(char field[F::width][F::height])
+		static int checkForHorizontalWin(int field[playfield::width][playfield::height])
 		{
 			//Check each row
-			for (int row = 0; row < F::height; row++) {
+			for (int row = 0; row < playfield::height; row++) {
 				int length = 1;
 				int column = 0;
-				char currentPlayer = field[column][row];
+				int currentPlayer = field[column][row];
 
 				do {
-					char nextPlayer = field[column + 1][row];
-					if (nextPlayer == currentPlayer && currentPlayer != F::none) {
+					int nextPlayer = field[column + 1][row];
+					if (nextPlayer == currentPlayer && currentPlayer != playfield::none) {
 						//If the next stone is from the same
 						length++;
 					} else {
@@ -43,29 +44,29 @@ class connect4Utils
 					}
 
 					column++;
-				} while (length < 4 && column < F::width - 1); //do not go to the last row
+				} while (length < 4 && column < playfield::width - 1); //do not go to the last row
 
 				if (length == 4) {
 					return currentPlayer;
 				}
 			}
 
-			return F::none;
+			return playfield::none;
 		}
 
-		static char checkForVerticalWin(char field[F::width][F::height])
+		static int checkForVerticalWin(int field[playfield::width][playfield::height])
 		{
 			//Check each column
-			for (int column = 0; column < F::width; column++)
+			for (int column = 0; column < playfield::width; column++)
 			{
 				int length = 1;
 				int row = 0;
-				char currentPlayer = field[row][column];
+				int currentPlayer = field[row][column];
 
 				do
 				{
-					char nextPlayer = field[column][row + 1];
-					if (nextPlayer == currentPlayer && currentPlayer != F::none)
+					int nextPlayer = field[column][row + 1];
+					if (nextPlayer == currentPlayer && currentPlayer != playfield::none)
 					{
 						//If the next stone is from the same
 						length++;
@@ -78,7 +79,7 @@ class connect4Utils
 					}
 
 					row++;
-				} while(length < 4 && row < F::height - 1); //do not go to the last row
+				} while(length < 4 && row < playfield::height - 1); //do not go to the last row
 
 				if (length == 4)
 				{
@@ -86,23 +87,23 @@ class connect4Utils
 				}
 			}
 
-			return F::none;
+			return playfield::none;
 		}
 
-		static char checkForDiagonalWin(char field[F::width][F::height])
+		static int checkForDiagonalWin(int field[playfield::width][playfield::height])
 		{
-			char winner = checkForLeftToBottomRightWin(field);
-			if (winner == F::none)
+			int winner = checkForLeftToBottomRightWin(field);
+			if (winner == playfield::none)
 			{
 				winner = checkForTopToBottomRightWin(field);
 			}
 
-			if (winner == F::none)
+			if (winner == playfield::none)
 			{
 				winner = checkForTopToBottomLeftWin(field);
 			}
 
-			if (winner == F::none)
+			if (winner == playfield::none)
 			{
 				winner = checkForRightToBottomLeftWin(field);
 			}
@@ -110,18 +111,18 @@ class connect4Utils
 			return winner;
 		}
 
-		static char checkForLeftToBottomRightWin(char field[F::width][F::height])
+		static int checkForLeftToBottomRightWin(int field[playfield::width][playfield::height])
 		{
-			for (int row = 0; row < F::height; row++)
+			for (int row = 0; row < playfield::height; row++)
 			{
 				int length = 1;
 				int column = 0;
 				int tempRow = row;
-				char currentPlayer = field[column][tempRow];
+				int currentPlayer = field[column][tempRow];
 
 				do {
-					char nextPlayer = field[column + 1][tempRow + 1];
-					if (nextPlayer == currentPlayer && currentPlayer != F::none)
+					int nextPlayer = field[column + 1][tempRow + 1];
+					if (nextPlayer == currentPlayer && currentPlayer != playfield::none)
 					{
 						length++;
 					}
@@ -133,7 +134,7 @@ class connect4Utils
 
 					tempRow++;
 					column++;
-				} while (length < 4 && column < F::width - 1&& tempRow < F::height - 1);
+				} while (length < 4 && column < playfield::width - 1&& tempRow < playfield::height - 1);
 
 				if (length == 4)
 				{
@@ -141,22 +142,22 @@ class connect4Utils
 				}
 			}
 
-			return F::none;
+			return playfield::none;
 		}
 
-		static char checkForTopToBottomRightWin(char field[F::width][F::height])
+		static int checkForTopToBottomRightWin(int field[playfield::width][playfield::height])
 		{
 			//Not each column must be checked because not each diagonal has 4 fields but for better understanding each diagonal will be checked
-			for (int column = 0; column < F::width; column++)
+			for (int column = 0; column < playfield::width; column++)
 			{
 				int length = 1;
 				int row = 0;
 				int tempColumn = column;
-				char currentPlayer = field[tempColumn][row];
+				int currentPlayer = field[tempColumn][row];
 
 				do {
-					char nextPlayer = field[tempColumn + 1][row + 1];
-					if (nextPlayer == currentPlayer && currentPlayer != F::none)
+					int nextPlayer = field[tempColumn + 1][row + 1];
+					if (nextPlayer == currentPlayer && currentPlayer != playfield::none)
 					{
 						length++;
 					}
@@ -168,7 +169,7 @@ class connect4Utils
 
 					row++;
 					tempColumn++;
-				} while (length < 4 && tempColumn < F::width - 1 && row < F::height - 1);
+				} while (length < 4 && tempColumn < playfield::width - 1 && row < playfield::height - 1);
 
 				if (length == 4)
 				{
@@ -176,21 +177,21 @@ class connect4Utils
 				}
 			}
 
-			return F::none;
+			return playfield::none;
 		}
 
-		static char checkForTopToBottomLeftWin(char field[F::width][F::height])
+		static int checkForTopToBottomLeftWin(int field[playfield::width][playfield::height])
 		{
 			//Not each column must be checked because not each diagonal has 4 fields but for better understanding each diagonal will be checked
-			for (int column = 1; column < F::width; column++)
+			for (int column = 1; column < playfield::width; column++)
 			{
 				int length = 1;
 				int row = 0;
 				int tempColumn = column;
-				char currentPlayer = field[tempColumn][row];
+				int currentPlayer = field[tempColumn][row];
 				do {
-					char nextPlayer = field[tempColumn - 1][row + 1];
-					if (nextPlayer == currentPlayer && currentPlayer != F::none)
+					int nextPlayer = field[tempColumn - 1][row + 1];
+					if (nextPlayer == currentPlayer && currentPlayer != playfield::none)
 					{
 						length++;
 					}
@@ -202,7 +203,7 @@ class connect4Utils
 
 					row++;
 					tempColumn--;
-				} while (length < 4 && tempColumn > 0 && row < F::height - 1);
+				} while (length < 4 && tempColumn > 0 && row < playfield::height - 1);
 
 				if (length == 4)
 				{
@@ -210,22 +211,22 @@ class connect4Utils
 				}
 			}
 
-			return F::none;
+			return playfield::none;
 		}
 
-		static char checkForRightToBottomLeftWin(char field[F::width][F::height])
+		static int checkForRightToBottomLeftWin(int field[playfield::width][playfield::height])
 		{
 			//Not each row must be checked because not each diagonal has 4 fields but for better understanding each diagonal will be checked
-			for (int row = 0; row < F::height; row++)
+			for (int row = 0; row < playfield::height; row++)
 			{
 				int length = 1;
-				int column = F::width - 1;
+				int column = playfield::width - 1;
 				int tempRow = row;
-				char currentPlayer = field[column][tempRow];
+				int currentPlayer = field[column][tempRow];
 
 				do {
-					char nextPlayer = field[column - 1][tempRow + 1];
-					if (nextPlayer == currentPlayer && currentPlayer != F::none)
+					int nextPlayer = field[column - 1][tempRow + 1];
+					if (nextPlayer == currentPlayer && currentPlayer != playfield::none)
 					{
 						length++;
 					}
@@ -237,7 +238,7 @@ class connect4Utils
 
 					tempRow++;
 					column--;
-				} while (length < 4 && column > 0 && tempRow < F::height - 1);
+				} while (length < 4 && column > 0 && tempRow < playfield::height - 1);
 
 				if (length == 4)
 				{
@@ -245,7 +246,7 @@ class connect4Utils
 				}
 			}
 
-			return F::none;
+			return playfield::none;
 		}
 
 };

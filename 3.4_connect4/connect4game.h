@@ -8,7 +8,10 @@ class connect4game
 {
 	public:
 		void startGame();
-		void startGame(player &player1, player &player2);
+		int startGame(player &player1, player &player2, bool doPrintField = true);
+
+	private:
+		void runBenchmarking();
 };
 
 

@@ -15,13 +15,15 @@ using namespace std;
 class computerPlayer : public player
 {
 	private:
-		char myColor = ' ';
-		char opponentColor = ' ';
-		char none = playfield::none;
-		char localField[playfield::width][playfield::height];
+		int myColor = 0;
+		int opponentColor = 0;
+		int none = playfield::none;
+		int localField[playfield::width][playfield::height];
 		const int width = playfield::width;
 		const int height = playfield::height;
 		vector<int> openColumns = vector<int>();
+		int sleeptime = 250;
+		bool doPrint = true;
 
 		void setStoneColor(const playfield &field)
 		{
@@ -43,10 +45,14 @@ class computerPlayer : public player
 		}
 
 	public:
+		computerPlayer(int sleeptime, bool doPrint) : sleeptime(sleeptime), doPrint(doPrint) {}
+
+		computerPlayer() {}
+
 		virtual int play(const playfield &field) override
 		{
 			//At the beginning the computer has to found out which color he is
-			if (myColor == ' ')
+			if (myColor == 0)
 			{
 				setStoneColor(field);
 			}
@@ -59,8 +65,13 @@ class computerPlayer : public player
 
 			//Start finding the best column to place the stone
 			int column = findBestColumn(field);
-			std::this_thread::sleep_for(std::chrono::milliseconds(250));
-			cout << "Computer places stone in " << column + 1 << endl;
+			std::this_thread::sleep_for(std::chrono::milliseconds(sleeptime));
+
+			if (doPrint)
+			{
+				cout << "Computer places stone in " << column + 1 << endl;
+			}
+
 			return column;
 		}
 
@@ -162,7 +173,7 @@ class computerPlayer : public player
 		}
 
 		//This method simulates a possible move for further calculations
-		void tempPlay(int column, char stoneColor)
+		void tempPlay(int column, int stoneColor)
 		{
 			int row = 0;
 			while(row < height && localField[column][row] == none)
@@ -185,12 +196,12 @@ class computerPlayer : public player
 			localField[column][row] = none;
 		}
 
-		char hasWinner()
+		int hasWinner()
 		{
-			return connect4Utils<playfield>::checkForWin(localField);
+			return connect4Utils::checkForWin(localField);
 		}
 };
 
-static PlayerFH<computerPlayer> registerComputerPlayer;
+//static PlayerFH<computerPlayer> registerComputerPlayer;
 
 #endif //ADV_CPP_HS16_COMPUTERPLAYER_H
