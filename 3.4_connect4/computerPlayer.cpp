@@ -45,6 +45,7 @@ class computerPlayer : public player
 		}
 
 	public:
+		//Das wird für den Benchmark benötigt, damit es schnell läuft
 		computerPlayer(int sleeptime, bool doPrint) : sleeptime(sleeptime), doPrint(doPrint) {}
 
 		computerPlayer() {}
@@ -144,7 +145,14 @@ class computerPlayer : public player
 			}
 			else if (possibleColumns.size() > 4)
 			{
-				//If we more than 4 possibilities we prefer not an edge column
+				for (auto column : possibleColumns)
+				{
+					if (column > 1 && column < 5)
+					{
+						return column;
+					}
+				}
+
 				for (auto column : possibleColumns)
 				{
 					if (column > 0 && column < 6)

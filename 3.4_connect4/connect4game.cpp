@@ -165,7 +165,7 @@ void connect4game::runBenchmarking()
 	cout << "P1 = Our AI" << endl;
 	cout << "P2 = Nicos AI" << endl;
 
-	int remainingGames = 1000;
+	int remainingGames = 5000;
 	double totalGames = (double)remainingGames;
 	cout << "Simulating " << remainingGames << " games" << endl;
 
