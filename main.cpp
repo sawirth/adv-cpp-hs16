@@ -23,6 +23,8 @@
 #include "5.1_Emulating_pointers/emulatingPointersRunner.h"
 #include "7.2_inheritance_stack/Stack.cpp"
 #include "7.2_inheritance_stack/UnlimitedStack.cpp"
+#include "7.1_range_checking_iterator/RangeCheckingIterator.cpp"
+#include "7.3_back_inserter/BackInserterMerger.cpp"
 
 #include "8.2_regex_spell_checker/regexSpellChecker.h"
 
@@ -45,6 +47,9 @@ void runExercise14();
 void runExercise15();
 void runExercise16();
 void runExercise17();
+void runExercise18();
+void runExercise19();
+
 
 void selectExercise()
 {
@@ -67,6 +72,8 @@ void selectExercise()
     cout << "15 - Emulating Pointers (5.1)" << endl;
     cout << "16 - Inheritance Stack (7.2)" << endl;
     cout << "17 - Regex spell checker (8.2)" << endl;
+    cout << "18 - Range Checking Iterartor" << endl;
+    cout << "19 - Merging Containers with back_inserter" << endl;
 
     int exerciseNumber = 0;
     cout << "Please enter the number of the exercise that you want to run: ";
@@ -154,6 +161,13 @@ void selectExercise()
             runExercise17();
             break;
 
+        case 18:
+            runExercise18();
+            break;
+
+        case 19:
+            runExercise19();
+            break;
         default:
             cout << "Exercise " << exerciseNumber << " does not exist" << endl;
             cin.clear();
@@ -364,4 +378,44 @@ void runExercise16()
 void runExercise17()
 {
     regexSpellChecker::run();
+}
+
+void runExercise18()
+{
+    vector<int> v1;
+    v1.push_back(3);
+    v1.push_back(4);
+    v1.push_back(5);
+    RangeCheckingIterator<vector<int>::iterator> rangeCheckingIterator(v1.begin(),v1.end());
+    // cout << *rangeCheckingIterator << endl;
+     rangeCheckingIterator++;
+     rangeCheckingIterator++;
+     rangeCheckingIterator++;
+     rangeCheckingIterator++;
+     rangeCheckingIterator++;
+     rangeCheckingIterator++;
+     rangeCheckingIterator++;
+     rangeCheckingIterator--;
+     rangeCheckingIterator--;
+     rangeCheckingIterator--;
+     rangeCheckingIterator--;
+}
+
+
+void runExercise19()
+{
+    BackInserterMerger<vector<fraction>,list<fraction>,fraction> merger1;
+    vector<fraction> v1;
+    v1.push_back(fraction(3,4));
+    v1.push_back(fraction(5,7));
+    v1.push_back(fraction(8,9));
+    list<fraction> v2;
+    v2.push_back(fraction(1,2));
+    v2.push_back(fraction(4,7));
+    v2.push_back(fraction(12,13));
+    merger1.merge(v1, v2);
+    cout << "Our new container contains the values:" << endl;
+    for(int i = 0; i < v1.size(); i++){
+        cout << v1[i] << endl;
+    }
 }
