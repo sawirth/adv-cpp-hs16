@@ -24,6 +24,8 @@
 #include "7.2_inheritance_stack/Stack.cpp"
 #include "7.2_inheritance_stack/UnlimitedStack.cpp"
 
+#include "8.2_regex_spell_checker/regexSpellChecker.h"
+
 using namespace std;
 
 //Declare exercise functions here and implement them at the end
@@ -42,6 +44,7 @@ void runExercise13();
 void runExercise14();
 void runExercise15();
 void runExercise16();
+void runExercise17();
 
 void selectExercise()
 {
@@ -63,6 +66,7 @@ void selectExercise()
     cout << "14 - somefunction_t (4.5)" << endl;
     cout << "15 - Emulating Pointers (5.1)" << endl;
     cout << "16 - Inheritance Stack (7.2)" << endl;
+    cout << "17 - Regex spell checker (8.2)" << endl;
 
     int exerciseNumber = 0;
     cout << "Please enter the number of the exercise that you want to run: ";
@@ -144,6 +148,10 @@ void selectExercise()
 
         case 16:
             runExercise16();
+            break;
+
+        case 17:
+            runExercise17();
             break;
 
         default:
@@ -351,4 +359,9 @@ void runExercise16()
     us.print();
     stackSlicing(us);
     stackSlicing2(us);
+}
+
+void runExercise17()
+{
+    regexSpellChecker::run();
 }

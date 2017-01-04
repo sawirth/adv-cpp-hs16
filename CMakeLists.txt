@@ -67,6 +67,8 @@ set(SOURCE_FILES
 		7.2_inheritance_stack/UnlimitedStack.cpp
 		3.4_connect4/PlayerFactory.cpp
 		3.4_connect4/player_nico.h
-		3.4_connect4/player_nico.cc)
+		3.4_connect4/player_nico.cc
+		8.2_regex_spell_checker/regexSpellChecker.h
+		8.2_regex_spell_checker/regexSpellChecker.cc)
 
 add_executable(adv_cpp_hs16 ${SOURCE_FILES})
