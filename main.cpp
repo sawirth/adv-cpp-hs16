@@ -72,7 +72,7 @@ void selectExercise()
     cout << "15 - Emulating Pointers (5.1)" << endl;
     cout << "16 - Inheritance Stack (7.2)" << endl;
     cout << "17 - Regex spell checker (8.2)" << endl;
-    cout << "18 - Range Checking Iterartor" << endl;
+    cout << "18 - Range Checking Iterator" << endl;
     cout << "19 - Merging Containers with back_inserter" << endl;
 
     int exerciseNumber = 0;

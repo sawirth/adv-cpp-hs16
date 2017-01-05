@@ -4,6 +4,8 @@
 #include "humanPlayer.cpp"
 #include "computerPlayer.cpp"
 #include "player_nico.h"
+//#include "computerPlayerWithThreads.cpp"
+#include "threadAI.h"
 
 using namespace std;
 
@@ -20,17 +22,18 @@ void connect4game::startGame()
 	cout << "4 - Human vs. Nico AI" << endl;
 	cout << "5 - Computer vs Nico AI" << endl;
 	cout << "6 - AI Benchmarking" << endl;
+	cout << "7 - Human vs. Computer with threads" << endl;
 
 	int mode = 0;
 	do
 	{
 		cout << "Which mode do you want to play? ";
 		mode = utils::inputUtils::getInt();
-		if (mode < 1 || mode > 6)
+		if (mode < 1 || mode > 7)
 		{
 			cout << "Wrong number!" << endl;
 		}
-	} while (mode < 1 || mode > 6);
+	} while (mode < 1 || mode > 7);
 
 	switch(mode)
 	{
@@ -76,6 +79,14 @@ void connect4game::startGame()
 
 		case 6:
 			runBenchmarking();
+			break;
+
+		case 7:
+			{
+				humanPlayer p1 = humanPlayer();
+				threadAI p2 = threadAI();
+				startGame(p1, p2);
+			}
 			break;
 
 		default:

@@ -71,6 +71,8 @@ set(SOURCE_FILES
 		8.2_regex_spell_checker/regexSpellChecker.h
 		8.2_regex_spell_checker/regexSpellChecker.cc
 		7.1_range_checking_iterator/RangeCheckingIterator.cpp 		
-		7.3_back_inserter/BackInserterMerger.cpp)
+		7.3_back_inserter/BackInserterMerger.cpp
+		3.4_connect4/threadAI.cpp
+		3.4_connect4/threadAI.h)
 
 add_executable(adv_cpp_hs16 ${SOURCE_FILES})
