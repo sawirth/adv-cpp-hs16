@@ -73,6 +73,14 @@ set(SOURCE_FILES
 		7.1_range_checking_iterator/RangeCheckingIterator.cpp 		
 		7.3_back_inserter/BackInserterMerger.cpp
 		3.4_connect4/threadAI.cpp
-		3.4_connect4/threadAI.h)
+		3.4_connect4/threadAI.h
+		8.4_constructor_destructor/parent.cpp
+		8.4_constructor_destructor/parent.h
+		8.4_constructor_destructor/child.cpp
+		8.4_constructor_destructor/child.h
+		8.4_constructor_destructor/ConstrDestrDemo.cpp
+		8.4_constructor_destructor/ConstrDestrDemo.h
+		8.4_constructor_destructor/test.cpp
+		8.4_constructor_destructor/test.h)
 
 add_executable(adv_cpp_hs16 ${SOURCE_FILES})
