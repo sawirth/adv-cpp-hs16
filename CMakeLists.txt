@@ -83,6 +83,10 @@ set(SOURCE_FILES
 		8.4_constructor_destructor/test.cpp
 		8.4_constructor_destructor/test.h
 		6.2_mem_fun/demo.cpp
-		6.2_mem_fun/demo.h)
+		6.2_mem_fun/demo.h
+		9.1_single_manipulator/manipulator.cpp
+		9.1_single_manipulator/manipulator.h
+		9.1_single_manipulator/Form2.cpp
+		9.1_single_manipulator/Form2.h)
 
 add_executable(adv_cpp_hs16 ${SOURCE_FILES})

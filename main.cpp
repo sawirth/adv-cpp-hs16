@@ -28,6 +28,7 @@
 #include "8.4_constructor_destructor/ConstrDestrDemo.h"
 #include "8.2_regex_spell_checker/regexSpellChecker.h"
 #include "6.2_mem_fun/demo.h"
+#include "9.1_single_manipulator/manipulator.h"
 
 using namespace std;
 
@@ -52,6 +53,7 @@ void runExercise18();
 void runExercise19();
 void runExercise20();
 void runExercise21();
+void runExercise22();
 
 void selectExercise()
 {
@@ -77,7 +79,8 @@ void selectExercise()
     cout << "18 - Range Checking Iterator" << endl;
     cout << "19 - Merging Containers with back_inserter" << endl;
 	cout << "20 - Constructor Destructor Execution (8.4)" << endl;
-    cout << "21 - std::mem_fun demo" << endl;
+    cout << "21 - std::mem_fun demo (6.2)" << endl;
+    cout << "22 - User defined manipulator (9.1)" << endl;
 
     int exerciseNumber = 0;
     cout << "Please enter the number of the exercise that you want to run: ";
@@ -179,6 +182,10 @@ void selectExercise()
 
         case 21:
             runExercise21();
+            break;
+
+        case 22:
+            runExercise22();
             break;
 
         default:
@@ -441,4 +448,9 @@ void runExercise20()
 void runExercise21()
 {
     demo::run();
+}
+
+void runExercise22()
+{
+    manipulator::run();
 }
