@@ -26,8 +26,8 @@
 #include "7.1_range_checking_iterator/RangeCheckingIterator.cpp"
 #include "7.3_back_inserter/BackInserterMerger.cpp"
 #include "8.4_constructor_destructor/ConstrDestrDemo.h"
-
 #include "8.2_regex_spell_checker/regexSpellChecker.h"
+#include "6.2_mem_fun/demo.h"
 
 using namespace std;
 
@@ -51,6 +51,7 @@ void runExercise17();
 void runExercise18();
 void runExercise19();
 void runExercise20();
+void runExercise21();
 
 void selectExercise()
 {
@@ -76,6 +77,7 @@ void selectExercise()
     cout << "18 - Range Checking Iterator" << endl;
     cout << "19 - Merging Containers with back_inserter" << endl;
 	cout << "20 - Constructor Destructor Execution (8.4)" << endl;
+    cout << "21 - std::mem_fun demo" << endl;
 
     int exerciseNumber = 0;
     cout << "Please enter the number of the exercise that you want to run: ";
@@ -174,6 +176,10 @@ void selectExercise()
 		case 20:
 			runExercise20();
 			break;
+
+        case 21:
+            runExercise21();
+            break;
 
         default:
             cout << "Exercise " << exerciseNumber << " does not exist" << endl;
@@ -430,4 +436,9 @@ void runExercise19()
 void runExercise20()
 {
 	ConstrDestrDemo::run();
+}
+
+void runExercise21()
+{
+    demo::run();
 }

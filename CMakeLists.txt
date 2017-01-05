@@ -81,6 +81,8 @@ set(SOURCE_FILES
 		8.4_constructor_destructor/ConstrDestrDemo.cpp
 		8.4_constructor_destructor/ConstrDestrDemo.h
 		8.4_constructor_destructor/test.cpp
-		8.4_constructor_destructor/test.h)
+		8.4_constructor_destructor/test.h
+		6.2_mem_fun/demo.cpp
+		6.2_mem_fun/demo.h)
 
 add_executable(adv_cpp_hs16 ${SOURCE_FILES})
