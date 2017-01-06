@@ -1,16 +1,8 @@
 #include "connect4game.h"
 #include "../utils/inputUtils.h"
-#include <iostream>
-#include "humanPlayer.cpp"
-#include "computerPlayer.cpp"
-#include "player_nico.h"
-//#include "computerPlayerWithThreads.cpp"
-#include "threadAI.h"
 #include "player_tim.hpp"
 
 using namespace std;
-
-void runBenchmarking(player &player1, player &player2);
 
 void connect4game::startGame()
 {
@@ -39,86 +31,69 @@ void connect4game::startGame()
 		}
 	} while (mode < 1 || mode > 10);
 
-	switch(mode)
+	player *p1;
+	player *p2;
+
+	switch (mode)
 	{
 		case 1:
-			{
-				humanPlayer p1 = humanPlayer();
-				humanPlayer p2 = humanPlayer();
-				startGame(p1, p2);
-			}
+			p1 = PlayerFactory::make("human");
+			p2 = PlayerFactory::make("human");
+			startGame(p1, p2);
 			break;
 
 		case 2:
-			{
-				humanPlayer p1 = humanPlayer();
-				computerPlayer p2 = computerPlayer();
-				startGame(p1, p2);
-			}
+			p1 = PlayerFactory::make("human");
+			p2 = PlayerFactory::make("ai");
+			startGame(p1, p2);
 			break;
 
 		case 3:
-			{
-				computerPlayer p1 = computerPlayer();
-				computerPlayer p2 = computerPlayer();
-				startGame(p1, p2);
-			}
+			p1 = PlayerFactory::make("ai");
+			p2 = PlayerFactory::make("ai");
+			startGame(p1, p2);
 			break;
 
 		case 4:
-			{
-				humanPlayer p1 = humanPlayer();
-				player_nico nico = player_nico(2);
-				startGame(p1, nico);
-			}
+			p1 = PlayerFactory::make("human");
+			p2 = PlayerFactory::make("N(2)");
+			startGame(p1, p2);
 			break;
 
 		case 5:
-			{
-				computerPlayer p1 = computerPlayer();
-				player_nico nico = player_nico(2);
-				startGame(p1, nico);
-			}
+			p1 = PlayerFactory::make("ai");
+			p2 = PlayerFactory::make("N(2)");
+			startGame(p1, p2);
 			break;
 
 		case 6:
-			{
-				computerPlayer p1 = computerPlayer(0, false);
-				player_nico p2 = player_nico(2);
-				runBenchmarking(p1, p2);
-			}
+			p1 = PlayerFactory::make("ai_np");
+			p2 = PlayerFactory::make("N(2)");
+			runBenchmarking(p1, p2);
 			break;
 
 		case 7:
-			{
-				humanPlayer p1 = humanPlayer();
-				threadAI p2 = threadAI();
-				startGame(p1, p2);
-			}
+			p1 = PlayerFactory::make("ai");
+			p2 = PlayerFactory::make("thread");
+			startGame(p1, p2);
 			break;
 
 		case 8:
-			{
-				humanPlayer p1 = humanPlayer();
-				player_tim p2 = player_tim();
-				startGame(p1, p2);
-			}
-				break;
+			p1 = PlayerFactory::make("human");
+			p2 = new player_tim();
+			startGame(p1, p2);
+			break;
 
 		case 9:
-			{
-				computerPlayer p1 = computerPlayer();
-				player_tim p2 = player_tim();
-				startGame(p1, p2);
-			}
+			p1 = PlayerFactory::make("ai");
+			p2 = new player_tim();
+			startGame(p1, p2);
 			break;
 
 		case 10:
-			{
-				computerPlayer p1 = computerPlayer(0, false);
-				player_tim p2 = player_tim(false);
-				runBenchmarking(p1, p2);
-			}
+			p1 = PlayerFactory::make("ai_np");
+			p2 = new player_tim(false);
+			runBenchmarking(p1, p2);
 			break;
 
 		default:
@@ -127,16 +102,18 @@ void connect4game::startGame()
 	}
 
 	cout << "Thanks for playing :)" << endl;
+	delete p1;
+	delete p2;
 }
 
-int connect4game::startGame(player &player1, player &player2, bool doPrintField)
+int connect4game::startGame(player *player1, player *player2, bool doPrintField)
 {
 	playfield field = playfield();
 	field.initField();
 	field.isRunning = true;
 
 	int currentPlayer = 1;
-	while(field.isRunning)
+	while (field.isRunning)
 	{
 		if (doPrintField)
 		{
@@ -144,16 +121,16 @@ int connect4game::startGame(player &player1, player &player2, bool doPrintField)
 		}
 
 		bool succesfulMove = false;
-		while(!succesfulMove && !field.isTie())
+		while (!succesfulMove && !field.isTie())
 		{
 			int column;
 			if (currentPlayer == 1)
 			{
-				column = player1.play(field);
+				column = player1->play(field);
 			}
 			else
 			{
-				column = player2.play(field);
+				column = player2->play(field);
 			}
 
 			if ((column < 0 || column > 6) && doPrintField)
@@ -203,13 +180,13 @@ int connect4game::startGame(player &player1, player &player2, bool doPrintField)
 	return winner;
 }
 
-void connect4game::runBenchmarking(player& p1, player& p2)
+void connect4game::runBenchmarking(player *p1, player *p2)
 {
 	cout << "P1 = Our AI" << endl;
-	cout << "P2 = Nicos AI" << endl;
+	cout << "P2 = Other AI" << endl;
 
 	int remainingGames = 5000;
-	double totalGames = (double)remainingGames;
+	double totalGames = (double) remainingGames;
 	cout << "Simulating " << remainingGames << " games" << endl;
 
 	int p1Wins = 0;
@@ -217,11 +194,11 @@ void connect4game::runBenchmarking(player& p1, player& p2)
 	int ties = 0;
 	int errors = 0;
 
-	while(remainingGames > 0)
+	while (remainingGames > 0)
 	{
 		auto winner = startGame(p1, p2, false);
 
-		switch(winner)
+		switch (winner)
 		{
 			case 0:
 				ties++;
@@ -248,7 +225,9 @@ void connect4game::runBenchmarking(player& p1, player& p2)
 	double tiePercentage = ties / totalGames * 100;
 
 	cout << "== RESULTS ==" << endl;
-	cout << "P1 has won " << p1WinPercentage << "% of the games " << "(" << p1Wins << " out of " << totalGames << ")" << endl;
-	cout << "P2 has won " << p2WinPercentage << "% of the games " << "(" << p2Wins << " out of " << totalGames << ")" << endl;
+	cout << "P1 has won " << p1WinPercentage << "% of the games " << "(" << p1Wins << " out of " << totalGames << ")"
+		 << endl;
+	cout << "P2 has won " << p2WinPercentage << "% of the games " << "(" << p2Wins << " out of " << totalGames << ")"
+		 << endl;
 	cout << tiePercentage << "% ended with a tie (" << ties << " out of " << totalGames << ")" << endl;
 }

@@ -1,33 +1,10 @@
-#ifndef ADV_CPP_HS16_COMPUTERPLAYER_H
-#define ADV_CPP_HS16_COMPUTERPLAYER_H
+#include <cstring>
+#include "playfield.h"
+#include "computerPlayer.h"
 
-#include "player.cpp"
-#include <chrono>
-#include <thread>
-#include <iostream>
-#include <random>
-#include <algorithm>
-#include "connect4Utils.cpp"
-#include "PlayerFactory.cpp"
-
-using namespace std;
-
-class computerPlayer : public player
+void computerPlayer::setStoneColor(const playfield &field)
 {
-	private:
-		int myColor = 0;
-		int opponentColor = 0;
-		int none = playfield::none;
-		int localField[playfield::width][playfield::height];
-		const int width = playfield::width;
-		const int height = playfield::height;
-		vector<int> openColumns = vector<int>();
-		int sleeptime = 250;
-		bool doPrint = true;
-
-		void setStoneColor(const playfield &field)
-		{
-			//Since this method is called in the first round, its enough if we check the bottom row
+				//Since this method is called in the first round, its enough if we check the bottom row
 			for (int column = 0; column < field.width; column++)
 			{
 				//If we found a stone in the bottom row, the computer is player 2
@@ -42,174 +19,172 @@ class computerPlayer : public player
 			//Otherwise he is player 1
 			myColor = field.player1;
 			opponentColor = field.player2;
-		}
+}
 
-	public:
-		//Das wird für den Benchmark benötigt, damit es schnell läuft
-		computerPlayer(int sleeptime, bool doPrint) : sleeptime(sleeptime), doPrint(doPrint) {}
+int computerPlayer::play(const playfield &field)
+{
+	//At the beginning the computer has to found out which color he is
+	if (myColor == 0)
+	{
+		setStoneColor(field);
+	}
 
-		computerPlayer() {}
+	//Make temp copy of field so we can manipulate it to found out which is the best move
+	copyFieldToLocal(field);
 
-		virtual int play(const playfield &field) override
+	//find open columns
+	findOpenColumns();
+
+	//Start finding the best column to place the stone
+	int column = findBestColumn(field);
+	std::this_thread::sleep_for(std::chrono::milliseconds(sleeptime));
+
+	if (doPrint)
+	{
+		cout << "Computer places stone in " << column + 1 << endl;
+	}
+
+	return column;
+}
+
+player *computerPlayer::make(const char *player)
+{
+	int rc = strcmp(player, "ai");
+	if (rc == 0)
+	{
+		return new computerPlayer();
+	}
+
+	rc = strcmp(player, "ai_np");
+	if (rc == 0)
+	{
+		return new computerPlayer(0, false);
+	}
+
+	return nullptr;
+}
+
+void computerPlayer::copyFieldToLocal(const playfield &field)
+{
+	for (int column = 0; column < field.width; column++)
+	{
+		for (int row = 0; row < field.height; row++)
 		{
-			//At the beginning the computer has to found out which color he is
-			if (myColor == 0)
-			{
-				setStoneColor(field);
-			}
+			localField[column][row] = field.stoneat(column, row);
+		}
+	}
+}
 
-			//Make temp copy of field so we can manipulate it to found out which is the best move
-			copyFieldToLocal(field);
+int computerPlayer::findBestColumn(const playfield &field)
+{
+	vector<int> possibleColumns = vector<int>();
 
-			//find open columns
-			findOpenColumns();
+	for (unsigned int i = 0; i < openColumns.size(); i++)
+	{
+		//Play a temporary move in this column
+		int column = openColumns.at(i);
+		tempPlay(column, myColor);
 
-			//Start finding the best column to place the stone
-			int column = findBestColumn(field);
-			std::this_thread::sleep_for(std::chrono::milliseconds(sleeptime));
-
-			if (doPrint)
-			{
-				cout << "Computer places stone in " << column + 1 << endl;
-			}
-
+		//Check if we can win with that move
+		if (hasWinner() == myColor)
+		{
 			return column;
 		}
 
-		static player *make()
+		//If we cannot win we have to check if the opponent is then able to win because if he can win after our
+		//move, the column is not a good choice
+		findOpenColumns();
+		bool opponentCanWin = false;
+		for (unsigned int j = 0; j < openColumns.size(); j++)
 		{
-			return new computerPlayer();
+			int opponentColumn = openColumns.at(j);
+			tempPlay(opponentColumn, opponentColor);
+			if (hasWinner() == opponentColor)
+			{
+				opponentCanWin = true;
+			}
+
+			//We have to undo the move so we can make the next temporary move
+			undoMove(opponentColumn);
 		}
 
-	private:
-		void copyFieldToLocal(const playfield &field)
+		//If the opponent cannot win after our move we can add the column to the possible choices
+		if (!opponentCanWin && find(possibleColumns.begin(), possibleColumns.end(), column) == possibleColumns.end())
 		{
-			for (int column = 0; column < field.width; column++)
-			{
-				for (int row = 0; row < field.height; row++)
-				{
-					localField[column][row] = field.stoneat(column, row);
-				}
-			}
+			possibleColumns.push_back(column);
 		}
 
-		int findBestColumn(const playfield &field)
+		//We have to undo the move so we can make the next temporary move
+		undoMove(column);
+	}
+
+	random_shuffle(possibleColumns.begin(), possibleColumns.end());
+
+	if (possibleColumns.empty())
+	{
+		//If we have no opportunity left we lost and just play the first open column
+		return openColumns.at(0);
+	}
+	else if (possibleColumns.size() > 4)
+	{
+		for (auto column : possibleColumns)
 		{
-			vector<int> possibleColumns = vector<int>();
-
-			for (unsigned int i = 0; i < openColumns.size(); i++)
+			if (column > 1 && column < 5)
 			{
-				//Play a temporary move in this column
-				int column = openColumns.at(i);
-				tempPlay(column, myColor);
-
-				//Check if we can win with that move
-				if (hasWinner() == myColor)
-				{
-					return column;
-				}
-
-				//If we cannot win we have to check if the opponent is then able to win because if he can win after our
-				//move, the column is not a good choice
-				findOpenColumns();
-				bool opponentCanWin = false;
-				for (unsigned int j = 0; j < openColumns.size(); j++)
-				{
-					int opponentColumn = openColumns.at(j);
-					tempPlay(opponentColumn, opponentColor);
-					if (hasWinner() == opponentColor)
-					{
-						opponentCanWin = true;
-					}
-
-					//We have to undo the move so we can make the next temporary move
-					undoMove(opponentColumn);
-				}
-
-				//If the opponent cannot win after our move we can add the column to the possible choices
-				if (!opponentCanWin && find(possibleColumns.begin(), possibleColumns.end(), column) == possibleColumns.end())
-				{
-					possibleColumns.push_back(column);
-				}
-
-				//We have to undo the move so we can make the next temporary move
-				undoMove(column);
-			}
-
-			random_shuffle(possibleColumns.begin(), possibleColumns.end());
-
-			if (possibleColumns.empty())
-			{
-				//If we have no opportunity left we lost and just play the first open column
-				return openColumns.at(0);
-			}
-			else if (possibleColumns.size() > 4)
-			{
-				for (auto column : possibleColumns)
-				{
-					if (column > 1 && column < 5)
-					{
-						return column;
-					}
-				}
-
-				for (auto column : possibleColumns)
-				{
-					if (column > 0 && column < 6)
-					{
-						return column;
-					}
-				}
-			}
-			else
-			{
-				return possibleColumns.at(0);
-			}
-			return 0;
-		}
-
-		void findOpenColumns()
-		{
-			openColumns.clear();
-			for (int column = 0; column < width; column++)
-			{
-				if (localField[column][0] == none)
-				{
-					openColumns.push_back(column);
-				}
+				return column;
 			}
 		}
 
-		//This method simulates a possible move for further calculations
-		void tempPlay(int column, int stoneColor)
+		for (auto column : possibleColumns)
 		{
-			int row = 0;
-			while(row < height && localField[column][row] == none)
+			if (column > 0 && column < 6)
 			{
-				row++;
+				return column;
 			}
-
-			localField[column][row - 1] = stoneColor;
 		}
+	}
+	else
+	{
+		return possibleColumns.at(0);
+	}
+	return 0;
+}
 
-		//Removes the top most stone in the given column
-		void undoMove(int column)
+void computerPlayer::findOpenColumns()
+{
+	openColumns.clear();
+	for (int column = 0; column < width; column++)
+	{
+		if (localField[column][0] == none)
 		{
-			int row = 0;
-			while (row < height && localField[column][row] == none)
-			{
-				row++;
-			}
-
-			localField[column][row] = none;
+			openColumns.push_back(column);
 		}
+	}
+}
 
-		int hasWinner()
-		{
-			return connect4Utils::checkForWin(localField);
-		}
-};
+void computerPlayer::tempPlay(int column, int stoneColor)
+{
+	int row = 0;
+	while(row < height && localField[column][row] == none)
+	{
+		row++;
+	}
 
-//static PlayerFH<computerPlayer> registerComputerPlayer;
+	localField[column][row - 1] = stoneColor;
+}
 
-#endif //ADV_CPP_HS16_COMPUTERPLAYER_H
+void computerPlayer::undoMove(int column)
+{
+	int row = 0;
+	while (row < height && localField[column][row] == none)
+	{
+		row++;
+	}
+
+	localField[column][row] = none;
+}
+
+int computerPlayer::hasWinner()
+{
+	return connect4Utils::checkForWin(localField);
+}

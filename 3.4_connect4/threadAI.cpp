@@ -2,6 +2,7 @@
 #include <iostream>
 #include <random>
 #include <algorithm>
+#include <cstring>
 #include "connect4Utils.cpp"
 
 using namespace std;
@@ -232,6 +233,17 @@ int threadAI::findChangedColumn(const playfield &field)
 			}
 		}
 	}
+}
+
+player *threadAI::make(const char *player)
+{
+	int rc = strcmp(player, "thread");
+	if (rc == 0)
+	{
+		return new threadAI();
+	}
+
+	return nullptr;
 }
 
 std::mutex threadAI::mtx;

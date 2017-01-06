@@ -1,12 +1,27 @@
-#ifndef ADV_CPP_HS16_PLAYER_H
-#define ADV_CPP_HS16_PLAYER_H
+#include "player.h"
+#include <iostream>
+#include "computerPlayer.h"
+#include "humanPlayer.h"
+#include "player_nico.h"
 
-#include "playfield.h"
+std::list<makeType*> PlayerFactory::cl;
+static PlayerFH<computerPlayer> registerComputerPlayer;
+static PlayerFH<humanPlayer> registerHumanPlayer;
+static PlayerFH<player_nico> registerNicoAi;
 
-class player
+void PlayerFactory::add(makeType *m)
 {
-	public:
-		virtual int play(const playfield &field) = 0;
-		virtual ~player() {}
-};
-#endif //ADV_CPP_HS16_PLAYER_H
+	cl.push_back(m);
+}
+
+player *PlayerFactory::make(const char * plr)
+{
+	player *p = NULL;
+	std::list<makeType*>::const_iterator b = cl.begin(), e = cl.end();
+	while (b != e && (p = (*b)(plr)) == NULL)
+	{
+		++b;
+	}
+
+	return p;
+}

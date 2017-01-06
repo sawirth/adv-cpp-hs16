@@ -4,7 +4,7 @@
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>       /* time */
 #include <iostream> 
-#include "player.cpp"
+#include "player.h"
 
 class player_nico : public player {
 public:

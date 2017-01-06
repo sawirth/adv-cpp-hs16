@@ -6,7 +6,7 @@
 #include <vector>
 #include <thread>
 #include <map>
-#include "player.cpp"
+#include "player.h"
 
 class threadAI : public player
 {
@@ -35,8 +35,10 @@ class threadAI : public player
 		void calculateBestMoveIfOpponentPlays(int column);
 		int findChangedColumn(const playfield &field);
 
+
 	public:
 		virtual int play(const playfield &field);
+		static player *make(const char *player);
 };
 
 #endif //ADV_CPP_HS16_THREADAI_H

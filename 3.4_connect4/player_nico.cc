@@ -1,7 +1,5 @@
 #include "player_nico.h"
 #include <regex>
-#include <string>
-#include <iostream>
 
 int player_nico::play(const playfield &field){
 	for(int x = 0; x < field.width; x++){
@@ -42,7 +40,8 @@ int player_nico::getFreeHeight(int col, const playfield &field){
 	return -1;
 }
 
-player *player_nico::make(const char *plr){
+player *player_nico::make(const char *plr)
+{
 	if(plr[0]!='N') return NULL;
 
 	std::string p(plr);

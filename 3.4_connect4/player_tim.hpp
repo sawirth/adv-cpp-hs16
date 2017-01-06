@@ -4,7 +4,7 @@
 #include <iostream>
 #include <random>
 #include <time.h>
-#include "player.cpp"
+#include "player.h"
 #include "playfield.h"
 
 /**
