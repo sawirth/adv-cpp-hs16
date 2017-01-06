@@ -87,6 +87,8 @@ set(SOURCE_FILES
 		9.1_single_manipulator/manipulator.cpp
 		9.1_single_manipulator/manipulator.h
 		9.1_single_manipulator/Form2.cpp
-		9.1_single_manipulator/Form2.h)
+		9.1_single_manipulator/Form2.h
+		3.4_connect4/player_tim.hpp
+		3.4_connect4/player_tim.cpp)
 
 add_executable(adv_cpp_hs16 ${SOURCE_FILES})

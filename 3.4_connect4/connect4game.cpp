@@ -6,6 +6,7 @@
 #include "player_nico.h"
 //#include "computerPlayerWithThreads.cpp"
 #include "threadAI.h"
+#include "player_tim.hpp"
 
 using namespace std;
 
@@ -21,19 +22,22 @@ void connect4game::startGame()
 	cout << "3 - Computer vs. Computer" << endl;
 	cout << "4 - Human vs. Nico AI" << endl;
 	cout << "5 - Computer vs Nico AI" << endl;
-	cout << "6 - AI Benchmarking" << endl;
+	cout << "6 - AI Benchmarking Nico" << endl;
 	cout << "7 - Human vs. Computer with threads" << endl;
+	cout << "8 - Human vs. Tim AI" << endl;
+	cout << "9 - Computer vs. Tim AI" << endl;
+	cout << "10 - AI Benchmarking Tim" << endl;
 
 	int mode = 0;
 	do
 	{
 		cout << "Which mode do you want to play? ";
 		mode = utils::inputUtils::getInt();
-		if (mode < 1 || mode > 7)
+		if (mode < 1 || mode > 10)
 		{
 			cout << "Wrong number!" << endl;
 		}
-	} while (mode < 1 || mode > 7);
+	} while (mode < 1 || mode > 10);
 
 	switch(mode)
 	{
@@ -78,7 +82,11 @@ void connect4game::startGame()
 			break;
 
 		case 6:
-			runBenchmarking();
+			{
+				computerPlayer p1 = computerPlayer(0, false);
+				player_nico p2 = player_nico(2);
+				runBenchmarking(p1, p2);
+			}
 			break;
 
 		case 7:
@@ -86,6 +94,30 @@ void connect4game::startGame()
 				humanPlayer p1 = humanPlayer();
 				threadAI p2 = threadAI();
 				startGame(p1, p2);
+			}
+			break;
+
+		case 8:
+			{
+				humanPlayer p1 = humanPlayer();
+				player_tim p2 = player_tim();
+				startGame(p1, p2);
+			}
+				break;
+
+		case 9:
+			{
+				computerPlayer p1 = computerPlayer();
+				player_tim p2 = player_tim();
+				startGame(p1, p2);
+			}
+			break;
+
+		case 10:
+			{
+				computerPlayer p1 = computerPlayer(0, false);
+				player_tim p2 = player_tim(false);
+				runBenchmarking(p1, p2);
 			}
 			break;
 
@@ -171,7 +203,7 @@ int connect4game::startGame(player &player1, player &player2, bool doPrintField)
 	return winner;
 }
 
-void connect4game::runBenchmarking()
+void connect4game::runBenchmarking(player& p1, player& p2)
 {
 	cout << "P1 = Our AI" << endl;
 	cout << "P2 = Nicos AI" << endl;
@@ -184,9 +216,6 @@ void connect4game::runBenchmarking()
 	int p2Wins = 0;
 	int ties = 0;
 	int errors = 0;
-
-	computerPlayer p1 = computerPlayer(0, false);
-	player_nico p2 = player_nico(2);
 
 	while(remainingGames > 0)
 	{

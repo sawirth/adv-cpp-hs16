@@ -11,7 +11,7 @@ class connect4game
 		int startGame(player &player1, player &player2, bool doPrintField = true);
 
 	private:
-		void runBenchmarking();
+		void runBenchmarking(player& p1, player& p2);
 };
 
 
