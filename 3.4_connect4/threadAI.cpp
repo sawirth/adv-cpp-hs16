@@ -246,4 +246,12 @@ player *threadAI::make(const char *player)
 	return nullptr;
 }
 
+threadAI::~threadAI()
+{
+	for (unsigned int i = 0; i < threads.size(); i++)
+	{
+		threads.at(i).join();
+	}
+}
+
 std::mutex threadAI::mtx;

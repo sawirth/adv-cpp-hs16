@@ -74,7 +74,7 @@ void connect4game::startGame()
 			break;
 
 		case 7:
-			p1 = PlayerFactory::make("ai");
+			p1 = PlayerFactory::make("human");
 			p2 = PlayerFactory::make("thread");
 			startGame(p1, p2);
 			break;

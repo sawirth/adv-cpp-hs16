@@ -3,11 +3,13 @@
 #include "computerPlayer.h"
 #include "humanPlayer.h"
 #include "player_nico.h"
+#include "threadAI.h"
 
 std::list<makeType*> PlayerFactory::cl;
 static PlayerFH<computerPlayer> registerComputerPlayer;
 static PlayerFH<humanPlayer> registerHumanPlayer;
 static PlayerFH<player_nico> registerNicoAi;
+static PlayerFH<threadAI> registerThreadAi;
 
 void PlayerFactory::add(makeType *m)
 {

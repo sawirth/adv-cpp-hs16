@@ -39,6 +39,8 @@ class threadAI : public player
 	public:
 		virtual int play(const playfield &field);
 		static player *make(const char *player);
+
+		virtual ~threadAI() override;
 };
 
 #endif //ADV_CPP_HS16_THREADAI_H
