@@ -19,17 +19,18 @@ void connect4game::startGame()
 	cout << "8 - Human vs. Tim AI" << endl;
 	cout << "9 - Computer vs. Tim AI" << endl;
 	cout << "10 - AI Benchmarking Tim" << endl;
+	cout << "11 - AI Benchmarking our AI vs our AI" << endl;
 
 	int mode = 0;
 	do
 	{
 		cout << "Which mode do you want to play? ";
 		mode = utils::inputUtils::getInt();
-		if (mode < 1 || mode > 10)
+		if (mode < 1 || mode > 11)
 		{
 			cout << "Wrong number!" << endl;
 		}
-	} while (mode < 1 || mode > 10);
+	} while (mode < 1 || mode > 11);
 
 	player *p1;
 	player *p2;
@@ -96,6 +97,12 @@ void connect4game::startGame()
 			runBenchmarking(p1, p2);
 			break;
 
+		case 11:
+			p1 = PlayerFactory::make("ai_np");
+			p2 = PlayerFactory::make("ai_np");
+			runBenchmarking(p1, p2);
+			break;
+
 		default:
 			cout << "Something went wrong.. :S" << endl;
 			break;
@@ -106,13 +113,14 @@ void connect4game::startGame()
 	delete p2;
 }
 
-int connect4game::startGame(player *player1, player *player2, bool doPrintField)
+winnerResult connect4game::startGame(player *player1, player *player2, bool doPrintField)
 {
 	playfield field = playfield();
 	field.initField();
 	field.isRunning = true;
 
 	int currentPlayer = 1;
+	int numberOfMoves = 0;
 	while (field.isRunning)
 	{
 		if (doPrintField)
@@ -120,8 +128,8 @@ int connect4game::startGame(player *player1, player *player2, bool doPrintField)
 			field.printField();
 		}
 
-		bool succesfulMove = false;
-		while (!succesfulMove && !field.isTie())
+		bool isSuccessfulMove = false;
+		while (!isSuccessfulMove && !field.isTie())
 		{
 			int column;
 			if (currentPlayer == 1)
@@ -145,7 +153,8 @@ int connect4game::startGame(player *player1, player *player2, bool doPrintField)
 				continue;
 			}
 
-			succesfulMove = field.placeStone(column);
+			isSuccessfulMove = field.placeStone(column);
+			numberOfMoves++;
 
 			//Check for winner
 			field.checkForWinner();
@@ -166,39 +175,42 @@ int connect4game::startGame(player *player1, player *player2, bool doPrintField)
 		field.printField();
 	}
 
-	int winner = field.getWinner();
+	int winnerColor = field.getWinner();
 
-	if (winner == field.none && doPrintField)
+	if (winnerColor == field.none && doPrintField)
 	{
-		cout << "The game ended with a tie" << endl;
+		cout << "The game ended with a tie after " << numberOfMoves << " moves" << endl;
 	}
 	else if (doPrintField)
 	{
-		cout << "Player " << winner << " has won!" << endl;
+		cout << "Player " << winnerColor << " has won! Moves played: " << numberOfMoves << endl;
 	}
 
-	return winner;
+	return winnerResult(winnerColor, numberOfMoves);
 }
 
 void connect4game::runBenchmarking(player *p1, player *p2)
 {
+	cout << endl;
+	cout << "=== BENCHMARK MODE ===" << endl;
 	cout << "P1 = Our AI" << endl;
 	cout << "P2 = Other AI" << endl;
 
 	int remainingGames = 5000;
 	double totalGames = (double) remainingGames;
-	cout << "Simulating " << remainingGames << " games" << endl;
+	cout << "Simulating " << remainingGames << " games..." << endl;
 
 	int p1Wins = 0;
 	int p2Wins = 0;
 	int ties = 0;
 	int errors = 0;
+	int totalMoves = 0;
 
 	while (remainingGames > 0)
 	{
-		auto winner = startGame(p1, p2, false);
+		auto winnerResult = startGame(p1, p2, false);
 
-		switch (winner)
+		switch (winnerResult.playerColor)
 		{
 			case 0:
 				ties++;
@@ -218,16 +230,19 @@ void connect4game::runBenchmarking(player *p1, player *p2)
 		}
 
 		remainingGames--;
+		totalMoves += winnerResult.amountOfMoves;
 	}
 
 	double p1WinPercentage = p1Wins / totalGames * 100;
 	double p2WinPercentage = p2Wins / totalGames * 100;
 	double tiePercentage = ties / totalGames * 100;
+	double avgNumberOfMoves = (double) totalMoves / totalGames;
 
-	cout << "== RESULTS ==" << endl;
+	cout << "\n--- RESULTS ---" << endl;
 	cout << "P1 has won " << p1WinPercentage << "% of the games " << "(" << p1Wins << " out of " << totalGames << ")"
 		 << endl;
 	cout << "P2 has won " << p2WinPercentage << "% of the games " << "(" << p2Wins << " out of " << totalGames << ")"
 		 << endl;
 	cout << tiePercentage << "% ended with a tie (" << ties << " out of " << totalGames << ")" << endl;
+	cout << "Average moves per game: "  << avgNumberOfMoves << endl;
 }
