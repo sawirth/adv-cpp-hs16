@@ -29,6 +29,7 @@
 #include "8.2_regex_spell_checker/regexSpellChecker.h"
 #include "6.2_mem_fun/demo.h"
 #include "9.1_single_manipulator/manipulator.h"
+#include "6.4_RPN_complex/templateRPNcomplexRunner.h"
 
 using namespace std;
 
@@ -54,6 +55,7 @@ void runExercise19();
 void runExercise20();
 void runExercise21();
 void runExercise22();
+void runExercise23();
 
 void selectExercise()
 {
@@ -81,6 +83,7 @@ void selectExercise()
 	cout << "20 - Constructor Destructor Execution (8.4)" << endl;
     cout << "21 - std::mem_fun demo (6.2)" << endl;
     cout << "22 - User defined manipulator (9.1)" << endl;
+    cout << "23 - RPN calculator with complex numbers" << endl;
 
     int exerciseNumber = 0;
     cout << "Please enter the number of the exercise that you want to run: ";
@@ -186,6 +189,10 @@ void selectExercise()
 
         case 22:
             runExercise22();
+            break;
+            
+        case 23:
+            runExercise23();
             break;
 
         default:
@@ -407,18 +414,28 @@ void runExercise18()
     v1.push_back(4);
     v1.push_back(5);
     RangeCheckingIterator<vector<int>::iterator> rangeCheckingIterator(v1.begin(),v1.end());
-    // cout << *rangeCheckingIterator << endl;
-     rangeCheckingIterator++;
-     rangeCheckingIterator++;
-     rangeCheckingIterator++;
-     rangeCheckingIterator++;
-     rangeCheckingIterator++;
-     rangeCheckingIterator++;
-     rangeCheckingIterator++;
-     rangeCheckingIterator--;
-     rangeCheckingIterator--;
-     rangeCheckingIterator--;
-     rangeCheckingIterator--;
+
+    try{
+    for(;;rangeCheckingIterator++){
+        cout << *rangeCheckingIterator << endl;
+    }}
+    catch (string e){
+        cout << e << endl;
+    }
+
+     try{
+         rangeCheckingIterator--;
+         rangeCheckingIterator--;
+         rangeCheckingIterator--;
+         rangeCheckingIterator--;
+         rangeCheckingIterator--;
+         rangeCheckingIterator--;
+     }
+     catch (string e){
+         cout << e << endl;
+     }
+    cout << *rangeCheckingIterator << endl;
+
 }
 
 
@@ -453,4 +470,12 @@ void runExercise21()
 void runExercise22()
 {
     manipulator::run();
+}
+
+void runExercise23()
+{
+    templateRPNcomplexRunner r = templateRPNcomplexRunner();
+    cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    r.run();
 }

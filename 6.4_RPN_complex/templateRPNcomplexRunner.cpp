@@ -5,19 +5,38 @@
 #include "complex.h"
 #include "complex"
 
+typedef complex<float> cplxf;
 
 using namespace std;
+
+/*cplxf operator fraction()(cplxf a) {
+    int c = a.real();
+    int d = a.imag();
+    return fraction(c,d);
+}
+
+cplxf operator int()(cplxf a){
+    int i = a.real();
+    return i;
+}
+
+cplxf operator double()(cplxf a){
+    double d = a.real();
+    return d;
+}*/
+
 
 void templateRPNcomplexRunner::run()
 {
     // need to change type of stack here
-    templateRPNcomplex<fraction> stack;
+    templateRPNcomplex<complex<float>> stack;
 
     //typeid didn't work anymore so for every type a vector to compare need to be declared
     vector <int> intv;
     vector <fraction> fractionv;
     vector <double> doublev;
-    //vector<complex> complexv;
+    vector<cplxf> complexv;
+    complex<float> g;
 
 
     while(true) {
@@ -49,12 +68,15 @@ void templateRPNcomplexRunner::run()
                 {
                     stack.putOnStack(stoi(sub));
                 }
-                /*else if(typeid(stack.getNumberStack())== typeid(complexv)) {
-                    stack.putOnStack(sub);
-                }*/
                 else if(typeid(stack.getNumberStack())== typeid(doublev))
                 {
                     stack.putOnStack(stod(sub));
+                }
+                else if(typeid(stack.getNumberStack()) == typeid(complexv)){
+                    float temp = stoi(sub);
+                    iss >> sub;
+                    stack.putOnStack(cplxf (temp, stoi(sub)));
+
                 }
                 else if(typeid(stack.getNumberStack())== typeid(fractionv)) {
                     string delimiter = "/";
@@ -93,14 +115,14 @@ void templateRPNcomplexRunner::run()
             } else if (sub == "/") {
                 stack.division();
             } else if (sub == "m") {
-                stack.myMin();
-            } else if (sub == "m2") {
+               // stack.myMin();
+            } /*else if (sub == "m2") {
                 stack.myMin2();
             } else if (sub == "all+"){
                 stack.allPlus();
             } else if (sub == "all*"){
                 stack.allMultiplicate();
-            } else {
+            }*/ else {
                 cout << "No possible input, try again." << endl << "Be careful with whitespaces!" << endl;
             }
         }

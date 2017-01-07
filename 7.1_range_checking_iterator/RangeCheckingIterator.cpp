@@ -1,5 +1,6 @@
 #include <vector>
 #include <iostream>
+#include <exception>
 
 using namespace std;
 
@@ -14,41 +15,49 @@ public:
     RangeCheckingIterator(Iter begin, Iter end)
             : begin(begin), end(end), current(begin) {}
 
-    RangeCheckingIterator operator++(){
-        if (current == end) {
-            cout << "Watch out, you're iterator already reached the end!" << endl;
-        }
-        else{
+    RangeCheckingIterator operator++()throw(string){
+            if (current == end) {
+                string emessage = "You're iterator already reached the end!";
+                throw emessage;            }
+            else{
             current ++;
-        }
-    }
-    RangeCheckingIterator operator--(){
-        if (current == begin) {
-             cout << "Watch out, you're iterator already reached the start!" << endl;
-        }
-        else{
-            current --;
-        }
-    }
-    RangeCheckingIterator operator++(int){
-        if (current == end) {
-            cout << "Watch out, you're iterator already reached the end!" << endl;
-        }
-        else{
-            current ++;
-        }
-    }
-    RangeCheckingIterator operator--(int){
-        if (current == begin) {
-            cout << "Watch out, you're iterator already reached the start!" << endl;
-        }
-        else{
-            current --;
-        }
+            }
     }
 
-    typename iterator_traits<Iter>::reference operator*();
+    RangeCheckingIterator operator--()throw(string){
+            if (current == begin) {
+                string emessage = "You're iterator already reached the start!";
+                throw emessage;
+            }
+            else{
+                current --;
+            }
 
-    bool operator ==(RangeCheckingIterator const& other) const;
-    bool operator !=(RangeCheckingIterator const& other) const;
+    }
+
+    RangeCheckingIterator operator++(int)throw(string){
+            if (current == end) {
+                string emessage = "You're iterator already reached the end!";
+                throw emessage;
+            } else {
+                current++;
+            }
+
+    }
+
+    RangeCheckingIterator operator--(int)throw(string){
+            if (current == begin) {
+                string emessage = "You're iterator already reached the start!";
+                throw emessage;
+            }
+            else{
+                current --;
+            }
+
+    }
+
+    typename iterator_traits<Iter>::reference operator*(){
+       return *current;
+    }
+
 };

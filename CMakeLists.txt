@@ -91,6 +91,6 @@ set(SOURCE_FILES
 		3.4_connect4/player_tim.cpp
 		3.4_connect4/player.h
 		3.4_connect4/computerPlayer.h
-		3.4_connect4/humanPlayer.h)
+		3.4_connect4/humanPlayer.h 7.4_Locking_class/FileLocker.cpp)
 
 add_executable(adv_cpp_hs16 ${SOURCE_FILES})

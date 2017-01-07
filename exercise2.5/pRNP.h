@@ -20,7 +20,8 @@ private:
     pvectorRNP <T> numberStack = pvectorRNP <T>(filename);
 
 public:
-    pRNP(string filename): filename(filename) {}
+    pRNP(string filename): filename(filename) {
+    }
 
     void printStack() {
         for (int i = 0; i < getSize(); i++) {

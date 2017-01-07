@@ -12,6 +12,15 @@
 
 using namespace std;
 
+/*bool operator<(const complex<float> &complex1,const complex<float> &complex2){
+    if (complex1.real() < complex2.real()){
+        return true;
+    }
+    else{
+        return false;
+    }
+}*/
+
 template<typename T>
 class templateRPNcomplex
 {
@@ -134,12 +143,12 @@ public:
             cout << "Stack doesn't have 2 numbers to divide" << endl;
             return;
         }
-        if(*numb2 == 0){
+        /*if(*numb2 == 0){
             cout << "Division by zero is not allowed, try something other." << endl;
             numberStack.push_back(*numb2);
             numberStack.push_back(*numb1);
             return;
-        }
+        }*/
         cout << *numb1 << " / " << *numb2 << " = " << *numb1 / *numb2 << endl;
         numberStack.push_back(*numb1 / *numb2);
     }
@@ -152,6 +161,18 @@ public:
     T myMin(){
         T *a = nullptr;
         T *b = nullptr;
+        vector<complex<float>> complexv;
+        if(typeid(numberStack) == typeid(complexv)){
+            int a = (int)numberStack[numberStack.size() - 1];
+            int b = (int)numberStack[numberStack.size() - 2];
+            if (a>b){
+                cout << "The smaller one of " << numberStack[numberStack.size() - 1]<< " and " << numberStack[numberStack.size() - 2] << " is " << numberStack[numberStack.size() - 1] << "." << endl;
+                return numberStack[numberStack.size() - 1];
+            }
+            else{
+                cout << "The smaller one of " << numberStack[numberStack.size() - 1]<< " and " << numberStack[numberStack.size() - 2] << " is " << numberStack[numberStack.size() - 2] << "." << endl;
+                return numberStack[numberStack.size() - 2];}
+        }
         if (numberStack.size()>1) {
             a = new T;
             *a = numberStack[numberStack.size() - 1];
@@ -174,7 +195,7 @@ public:
         }
     }
 
-    T myMin2() {
+    /*T myMin2() {
         if(numberStack.empty()){
             cout << "No numbers in the stack." << endl;
             return 0;
@@ -184,9 +205,9 @@ public:
             if(cur < min1){min1 = cur;}});
         cout << "The minimum of the whole stack is: " << min1 << "." << endl;
         return min1;
-    }
+    }*/
 
-    T allPlus ()
+    /*T allPlus ()
     {
         T sumOfElements = accumulate(numberStack.begin(), numberStack.end(), 0.0);
         cout << "The sum of all elements is " << sumOfElements << "." << endl;
@@ -198,7 +219,7 @@ public:
         T productOfElements = accumulate(numberStack.begin(), numberStack.end(), 1.0, multiplies<double>());
         cout << "The product of all elements is " << productOfElements << "." << endl;
         return productOfElements;
-    }
+    }*/
 };
 
 #endif //ADV_CPP_HS16_TEMPLATERPNcomplex_H

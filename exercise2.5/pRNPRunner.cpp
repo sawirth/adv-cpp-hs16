@@ -3,6 +3,7 @@
 #include "pRNP.h"
 #include "../exercise2/fraction.h"
 #include "pRNPRunner.h"
+#include "../7.4_Locking_class/FileLocker.cpp"
 
 using namespace std;
 
@@ -11,11 +12,14 @@ void pRNPRunner::run()
     cout << "Enter path with filename where you want to store your data:" << endl;
     string path = "";
     cin >> path;
+    const char *path1 = path.c_str();
+    FileLocker f(path1);
 
     // need to change type of stack here
     pRNP <fraction> pRNP(path);
     cin.clear();
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
 
     //typeid didn't work anymore so for every type a vector to compare need to be declared
     vector <int> intv;
