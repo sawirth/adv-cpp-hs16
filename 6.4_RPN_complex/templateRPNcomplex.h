@@ -8,6 +8,7 @@
 #include "../exercise2/fraction.h"
 #include <numeric>
 #include <algorithm>
+#include <typeinfo>
 
 
 using namespace std;

@@ -1,6 +1,7 @@
 #include <vector>
 #include <iostream>
 
+
 using namespace std;
 
 struct FileLocker {
@@ -9,8 +10,11 @@ struct FileLocker {
 
     FileLocker(const char * lockme) : res(lockme) {
         f = fopen(lockme, "a");
-        flockfile(f);
+//        flockfile(f);
     }
 
-    ~FileLocker() { funlockfile(f); }
+    ~FileLocker()
+    {
+//        funlockfile(f);
+    }
 };
