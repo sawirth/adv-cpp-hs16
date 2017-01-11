@@ -1,5 +1,6 @@
 #include <vector>
 #include <iostream>
+#include <sys/file.h>
 
 
 using namespace std;
@@ -9,12 +10,12 @@ struct FileLocker {
     FILE *f;
 
     FileLocker(const char * lockme) : res(lockme) {
-        f = fopen(lockme, "a");
-//        flockfile(f);
+        f = fopen(lockme, "r");
+        flock(fileno(f), 1);
     }
 
     ~FileLocker()
     {
-//        funlockfile(f);
+        flock(fileno(f), 8);
     }
 };

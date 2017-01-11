@@ -13,15 +13,6 @@
 
 using namespace std;
 
-/*bool operator<(const complex<float> &complex1,const complex<float> &complex2){
-    if (complex1.real() < complex2.real()){
-        return true;
-    }
-    else{
-        return false;
-    }
-}*/
-
 template<typename T>
 class templateRPNcomplex
 {
@@ -164,9 +155,13 @@ public:
         T *b = nullptr;
         vector<complex<float>> complexv;
         if(typeid(numberStack) == typeid(complexv)){
-            int a = (int)numberStack[numberStack.size() - 1];
-            int b = (int)numberStack[numberStack.size() - 2];
-            if (a>b){
+            int a = numberStack[numberStack.size() - 1].real();
+            int b = (int)numberStack[numberStack.size() - 2].real();
+            if(a == b){
+                a = numberStack[numberStack.size() - 1].imag();
+                b = (int)numberStack[numberStack.size() - 2].imag();
+            }
+            if (a<b){
                 cout << "The smaller one of " << numberStack[numberStack.size() - 1]<< " and " << numberStack[numberStack.size() - 2] << " is " << numberStack[numberStack.size() - 1] << "." << endl;
                 return numberStack[numberStack.size() - 1];
             }
@@ -174,7 +169,7 @@ public:
                 cout << "The smaller one of " << numberStack[numberStack.size() - 1]<< " and " << numberStack[numberStack.size() - 2] << " is " << numberStack[numberStack.size() - 2] << "." << endl;
                 return numberStack[numberStack.size() - 2];}
         }
-        if (numberStack.size()>1) {
+        /*if (numberStack.size()>1) {
             a = new T;
             *a = numberStack[numberStack.size() - 1];
             b = new T;
@@ -193,7 +188,7 @@ public:
         {
             cout << "The smaller one of " << *a << " and " << *b << " is " << *b << "." << endl;
             return *b;
-        }
+        }*/
     }
 
     /*T myMin2() {

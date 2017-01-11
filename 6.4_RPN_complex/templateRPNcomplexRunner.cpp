@@ -9,20 +9,29 @@ typedef complex<float> cplxf;
 
 using namespace std;
 
-/*cplxf operator fraction()(cplxf a) {
+/*fraction operator fraction()(cplxf a) {
     int c = a.real();
     int d = a.imag();
     return fraction(c,d);
 }
 
-cplxf operator int()(cplxf a){
+int operator int()(cplxf a){
     int i = a.real();
     return i;
 }
 
-cplxf operator double()(cplxf a){
+double operator double()(cplxf a){
     double d = a.real();
     return d;
+}*/
+
+/*bool operator<(const complex<float> &complex1,const complex<float> &complex2){
+    if (complex1.real() < complex2.real()){
+        return true;
+    }
+    else{
+        return false;
+    }
 }*/
 
 
@@ -115,7 +124,7 @@ void templateRPNcomplexRunner::run()
             } else if (sub == "/") {
                 stack.division();
             } else if (sub == "m") {
-               // stack.myMin();
+                stack.myMin();
             } /*else if (sub == "m2") {
                 stack.myMin2();
             } else if (sub == "all+"){
