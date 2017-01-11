@@ -8,14 +8,13 @@ using namespace std;
 struct FileLocker {
     const char * res;
     FILE *f;
-
     FileLocker(const char * lockme) : res(lockme) {
         f = fopen(lockme, "r");
-        flock(fileno(f), 1);
+        flock(fileno(f), LOCK_EX);
     }
 
     ~FileLocker()
     {
-        flock(fileno(f), 8);
+        flock(fileno(f), LOCK_UN);
     }
 };
